@@ -8,16 +8,9 @@
     body {
       margin:0;
       font-family:'Tajawal',sans-serif;
-      background:linear-gradient(270deg,#0A0A0C,#121212,#0A0A0C);
-      background-size:600% 600%;
-      animation:gradientMove 20s ease infinite;
+      background:#0A0A0C;
       color:#fff;
       overflow-x:hidden;
-    }
-    @keyframes gradientMove {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
     }
     header {
       background:#121212;
@@ -64,11 +57,13 @@
       text-align:center;
       padding:120px 20px;
       animation:fadeIn 2s ease;
+      position:relative;
+      z-index:1;
     }
     .hero h1 {
-      font-size:48px;
+      font-size:52px;
       margin-bottom:20px;
-      text-shadow:0 0 20px #007BFF, 0 0 40px #FF2E2E;
+      text-shadow:0 0 25px #FF2E2E, 0 0 40px #007BFF;
       animation:slideDown 1.5s ease;
     }
     .hero button {
@@ -92,6 +87,8 @@
       max-width:800px;
       text-align:center;
       animation:fadeInUp 2s ease;
+      position:relative;
+      z-index:1;
     }
     ul {list-style:none; padding:0;}
     ul li {margin:10px 0; background:rgba(28,28,28,0.7); padding:10px; border-radius:6px;}
@@ -118,6 +115,8 @@
       padding:20px;
       font-size:14px;
       box-shadow:0 -5px 15px rgba(0,0,0,0.5);
+      position:relative;
+      z-index:1;
     }
     @keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
     @keyframes slideDown {from{transform:translateY(-50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
@@ -144,9 +143,21 @@
       width:0%;
       transition:width 0.5s;
     }
+    /* خلفية متحركة */
+    #bgCanvas {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:#0A0A0C;
+    }
   </style>
 </head>
 <body>
+
+<canvas id="bgCanvas"></canvas>
 
 <header>
   <img src="logo.png" alt="Macseky Logo">
@@ -216,4 +227,4 @@ async function loadStats() {
     document.getElementById("status").innerText = data.livestream ? "أونلاين ✅" : "أوفلاين ❌";
 
     let maxViewers = 500;
-    let percent = Math.min((viewers /
+    let percent = Math.min((viewers / maxViewers)
