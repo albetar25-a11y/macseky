@@ -5,22 +5,116 @@
   <title>من أنا - Macseky</title>
   <link rel="icon" type="image/png" href="logo.png">
   <style>
-    body {background:#0A0A0C; color:#fff; font-family:'Tajawal',sans-serif; margin:0; text-align:center;}
-    header {background:#121212; padding:15px; text-align:center; position:sticky; top:0;}
-    header img {height:70px; transition:transform 0.6s ease, filter 0.6s ease;}
-    header img:hover {transform:scale(1.2) rotate(-5deg); filter:drop-shadow(0 0 15px #FF2E2E);}
-    nav a {color:#fff; margin:0 10px; text-decoration:none; font-weight:bold;}
-    nav a:hover {color:#FF2E2E;}
-    h1 {margin-top:40px; font-size:36px; color:#007BFF; animation:slideDown 1.5s ease;}
-    p {max-width:700px; margin:auto; line-height:1.8; font-size:18px; animation:fadeInUp 2s ease;}
-    ul {list-style:none; padding:0; max-width:700px; margin:auto; text-align:right;}
-    ul li {background:#1c1c1c; margin:10px 0; padding:10px; border-radius:6px; animation:fadeIn 2s ease;}
+    body {
+      margin:0;
+      font-family:'Tajawal',sans-serif;
+      background:#0A0A0C;
+      color:#fff;
+      text-align:center;
+      overflow-x:hidden;
+    }
+    header {
+      background:#121212;
+      padding:15px;
+      text-align:center;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 0 15px rgba(255,46,46,0.5);
+    }
+    header img {
+      height:70px;
+      transition:transform 0.6s ease, filter 0.6s ease;
+    }
+    header img:hover {
+      transform:scale(1.2) rotate(-5deg);
+      filter:drop-shadow(0 0 15px #FF2E2E);
+    }
+    nav a {
+      color:#fff;
+      margin:0 10px;
+      text-decoration:none;
+      font-weight:bold;
+      position:relative;
+      transition:color 0.3s ease;
+    }
+    nav a::after {
+      content:"";
+      position:absolute;
+      width:0%;
+      height:2px;
+      bottom:-5px;
+      left:0;
+      background:#FF2E2E;
+      transition:width 0.3s;
+    }
+    nav a:hover {
+      color:#FF2E2E;
+    }
+    nav a:hover::after {
+      width:100%;
+    }
+    h1 {
+      margin-top:40px;
+      font-size:42px;
+      color:#007BFF;
+      text-shadow:0 0 20px #FF2E2E, 0 0 40px #007BFF;
+      animation:slideDown 1.5s ease;
+      position:relative;
+      z-index:1;
+    }
+    p {
+      max-width:700px;
+      margin:auto;
+      line-height:1.8;
+      font-size:18px;
+      animation:fadeInUp 2s ease;
+      position:relative;
+      z-index:1;
+    }
+    h2 {
+      margin-top:40px;
+      font-size:28px;
+      color:#FF2E2E;
+      text-shadow:0 0 15px #FF2E2E;
+      position:relative;
+      z-index:1;
+    }
+    ul {
+      list-style:none;
+      padding:0;
+      max-width:700px;
+      margin:auto;
+      text-align:right;
+      position:relative;
+      z-index:1;
+    }
+    ul li {
+      background:rgba(28,28,28,0.7);
+      margin:10px 0;
+      padding:10px;
+      border-radius:6px;
+      animation:fadeIn 2s ease;
+    }
     @keyframes slideDown {from{transform:translateY(-50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
     @keyframes fadeInUp {from{transform:translateY(50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
     @keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
+    /* خلفية متحركة */
+    #bgCanvas {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      background:#0A0A0C;
+    }
   </style>
 </head>
 <body>
+
+<canvas id="bgCanvas"></canvas>
+
 <header>
   <img src="logo.png" alt="Macseky Logo">
   <nav>
@@ -29,10 +123,8 @@
     <a href="rules.html">قوانين البث</a>
     <a href="videos.html">أحدث الفيديوهات</a>
     <a href="support.html"> الدعم المادي</a>
-
     <a href="shop.html">المتجر</a>
     <a href="contact.html">تواصل</a>
-
   </nav>
 </header>
 
@@ -51,6 +143,40 @@
   <li>🌍 تمثيل الأردن في محافل رياضية عالمية.</li>
   <li>🎮 بناء مجتمع رقمي ممتع عبر البثوث المباشرة.</li>
 </ul>
+
+<script>
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+for (let i=0; i<100; i++) {
+  particles.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    r: Math.random()*2+1,
+    dx: (Math.random()-0.5)*0.5,
+    dy: (Math.random()-0.5)*0.5
+  });
+}
+
+function draw() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = "#FF2E2E";
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+    p.x += p.dx;
+    p.y += p.dy;
+    if(p.x<0||p.x>canvas.width) p.dx*=-1;
+    if(p.y<0||p.y>canvas.height) p.dy*=-1;
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
 
 </body>
 </html>
