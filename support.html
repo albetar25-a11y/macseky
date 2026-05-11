@@ -2,39 +2,56 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الدعم المادي - موقع يزن البيطار</title>
-  <link rel="stylesheet" href="style.css">
+  <title>الدعم المادي - Macseky</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    body {background:#0A0A0C; color:#fff; font-family:'Tajawal',sans-serif; margin:0; text-align:center;}
+    header {background:#121212; padding:15px; text-align:center; position:sticky; top:0;}
+    header img {height:70px; transition:transform 0.6s ease, filter 0.6s ease;}
+    header img:hover {transform:scale(1.2) rotate(-5deg); filter:drop-shadow(0 0 15px #FF2E2E);}
+    nav a {color:#fff; margin:0 10px; text-decoration:none; font-weight:bold;}
+    nav a:hover {color:#FF2E2E;}
+    h1 {margin-top:40px; font-size:36px; color:#007BFF; animation:slideDown 1.5s ease;}
+    p {max-width:700px; margin:auto; line-height:1.8; font-size:18px; animation:fadeInUp 2s ease;}
+    .support-buttons {display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin:25px 0;}
+    .btn-support {background:#FF2E2E; color:#fff; padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:bold; transition:0.3s;}
+    .btn-support:hover {background:#fff; color:#FF2E2E; transform:scale(1.05);}
+    .progress-bar {width:80%; height:20px; background:#333; border-radius:10px; margin:20px auto; overflow:hidden;}
+    .progress-fill {height:100%; background:#FF2E2E; width:45%; transition:width 0.5s ease;}
+    @keyframes slideDown {from{transform:translateY(-50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+    @keyframes fadeInUp {from{transform:translateY(50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+  </style>
 </head>
 <body>
-  <div id="navbar"></div>
-  <script>
-    fetch("navbar.html")
-      .then(response => response.text())
-      .then(data => document.getElementById("navbar").innerHTML = data);
-  </script>
+<header>
+  <img src="logo.png" alt="Macseky Logo">
+  <nav>
+    <a href="index.html">🏠 الرئيسية</a>
+    <a href="about.html">من أنا</a>
+    <a href="rules.html">قوانين البث</a>
+    <a href="videos.html">أحدث الفيديوهات</a>
+    <a href="support.html" style="color:#FF2E2E;"> الدعم المادي</a>
+    <a href="shop.html">المتجر</a>
+    <a href="contact.html">تواصل</a>
+  </nav>
+</header>
 
-  <section class="support-section">
-    <h1>💖 الدعم المادي</h1>
-    <p>ساعدني أطور المحتوى أكثر من خلال دعمك بأي طريقة من الطرق التالية:</p>
+<h1>💖 الدعم المادي</h1>
+<p>
+إذا حابب تدعمني وتساعدني أطور المحتوى أكثر، فيك تختار الطريقة اللي بتناسبك من الخيارات التالية:
+</p>
 
-    <div class="support-buttons">
-      <a href="https://www.paypal.me/YourLink" target="_blank" class="btn-support">💳 PayPal</a>
-      <a href="https://www.patreon.com/YourLink" target="_blank" class="btn-support">⭐ Patreon</a>
-      <a href="https://www.buymeacoffee.com/YourLink" target="_blank" class="btn-support">☕ Buy Me a Coffee</a>
-    </div>
+<div class="support-buttons">
+  <a href="https://www.paypal.me/YourLink" target="_blank" class="btn-support">💳 PayPal</a>
+  <a href="https://www.patreon.com/YourLink" target="_blank" class="btn-support">⭐ Patreon</a>
+  <a href="https://www.buymeacoffee.com/YourLink" target="_blank" class="btn-support">☕ Buy Me a Coffee</a>
+</div>
 
-    <div class="support-progress">
-      <h3>🎯 هدف الشهر</h3>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 45%;"></div>
-      </div>
-      <p>تم تحقيق <strong>45%</strong> من الهدف الشهري! شكراً لكل الداعمين 🙏</p>
-    </div>
-  </section>
+<h2>🎯 هدف الشهر</h2>
+<div class="progress-bar">
+  <div class="progress-fill"></div>
+</div>
+<p>تم تحقيق <strong>45%</strong> من الهدف الشهري! شكراً لكل الداعمين 🙏</p>
 
-  <footer>
-    <p>© 2026 يزن البيطار | جميع الحقوق محفوظة</p>
-  </footer>
 </body>
 </html>
