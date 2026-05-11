@@ -234,4 +234,5 @@ async function loadStats() {
 
     let viewers = data.livestream?.viewer_count || 0;
     document.getElementById("viewers").innerText = viewers;
-    document.getElementById("game").innerText = data.livestream?.session_title || "غير محدد
+    document.getElementById("game").innerText = data.livestream?.session_title || "غير محدد";
+    document.getElementById("status").innerText = data
