@@ -143,6 +143,16 @@
       width:0%;
       transition:width 0.5s;
     }
+    /* خلفية فيديو */
+    #bg-video {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:-2;
+    }
     /* خلفية متحركة */
     #bgCanvas {
       position:fixed;
@@ -150,13 +160,14 @@
       left:0;
       width:100%;
       height:100%;
-      z-index:0;
-      background:#0A0A0C;
+      z-index:-1;
+      background:transparent;
     }
   </style>
 </head>
 <body>
 
+<video autoplay muted loop id="bg-video"></video>
 <canvas id="bgCanvas"></canvas>
 
 <header>
@@ -223,8 +234,4 @@ async function loadStats() {
 
     let viewers = data.livestream?.viewer_count || 0;
     document.getElementById("viewers").innerText = viewers;
-    document.getElementById("game").innerText = data.livestream?.session_title || "غير محدد";
-    document.getElementById("status").innerText = data.livestream ? "أونلاين ✅" : "أوفلاين ❌";
-
-    let maxViewers = 500;
-    let percent = Math.min((viewers / maxViewers)
+    document.getElementById("game").innerText = data.livestream?.session_title || "غير محدد
