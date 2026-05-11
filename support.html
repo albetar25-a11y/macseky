@@ -11,13 +11,39 @@
     header img:hover {transform:scale(1.2) rotate(-5deg); filter:drop-shadow(0 0 15px #FF2E2E);}
     nav a {color:#fff; margin:0 10px; text-decoration:none; font-weight:bold;}
     nav a:hover {color:#FF2E2E;}
-    h1 {margin-top:40px; font-size:36px; color:#007BFF; animation:slideDown 1.5s ease;}
+    h1 {margin-top:40px; font-size:36px; color:#FF2E2E; animation:slideDown 1.5s ease;}
     p {max-width:700px; margin:auto; line-height:1.8; font-size:18px; animation:fadeInUp 2s ease;}
-    .support-buttons {display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin:25px 0;}
-    .btn-support {background:#FF2E2E; color:#fff; padding:12px 25px; border-radius:8px; text-decoration:none; font-weight:bold; transition:0.3s;}
-    .btn-support:hover {background:#fff; color:#FF2E2E; transform:scale(1.05);}
-    .progress-bar {width:80%; height:20px; background:#333; border-radius:10px; margin:20px auto; overflow:hidden;}
-    .progress-fill {height:100%; background:#FF2E2E; width:45%; transition:width 0.5s ease;}
+    
+    /* أزرار الدعم */
+    .support-buttons {display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin:30px 0;}
+    .btn-support {
+      background: linear-gradient(45deg, #FF2E2E, #FF6F61);
+      color:#fff; padding:15px 30px; border-radius:12px;
+      text-decoration:none; font-weight:bold; font-size:18px;
+      box-shadow:0 0 15px rgba(255,46,46,0.6);
+      transition:0.4s; position:relative; overflow:hidden;
+    }
+    .btn-support::after {
+      content:""; position:absolute; top:0; left:-100%;
+      width:100%; height:100%; background:rgba(255,255,255,0.2);
+      transition:0.4s;
+    }
+    .btn-support:hover {transform:scale(1.08);}
+    .btn-support:hover::after {left:0;}
+    
+    /* عداد الهدف */
+    .progress-container {margin-top:40px;}
+    .progress-bar {
+      width:80%; height:25px; background:#333;
+      border-radius:15px; margin:20px auto; overflow:hidden;
+      box-shadow:0 0 10px rgba(255,46,46,0.5);
+    }
+    .progress-fill {
+      height:100%; background:linear-gradient(90deg,#FF2E2E,#FF6F61);
+      width:0; transition:width 1.5s ease-in-out;
+    }
+    .goal-text {font-size:18px; margin-top:10px; color:#ccc;}
+    
     @keyframes slideDown {from{transform:translateY(-50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
     @keyframes fadeInUp {from{transform:translateY(50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
   </style>
@@ -36,9 +62,10 @@
   </nav>
 </header>
 
-<h1>💖 الدعم المادي</h1>
+<h1> الدعم المادي</h1>
 <p>
-إذا حابب تدعمني وتساعدني أطور المحتوى أكثر، فيك تختار الطريقة اللي بتناسبك من الخيارات التالية:
+دعمك هو السبب في استمرار المحتوى وتطوره 🙏  
+اختر الطريقة اللي تناسبك وكن جزء من نجاحنا!
 </p>
 
 <div class="support-buttons">
@@ -46,11 +73,21 @@
   <a href="https://creators.sa/yazanalbitar" target="_blank" class="btn-support">☕ Buy Me a Coffee</a>
 </div>
 
-<h2>🎯 هدف الشهر</h2>
-<div class="progress-bar">
-  <div class="progress-fill"></div>
+<div class="progress-container">
+  <h2>🎯 هدف الشهر</h2>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+  <p class="goal-text" id="goal-text">تم تحقيق 0% من الهدف الشهري</p>
 </div>
-<p>تم تحقيق <strong>45%</strong> من الهدف الشهري! شكراً لكل الداعمين 🙏</p>
+
+<script>
+  // مثال: جلب نسبة الدعم من ملف JSON أو API
+  // حالياً مجرد قيمة تجريبية
+  let supportPercentage = 65; // غيّرها حسب الإحصائيات الحقيقية
+  document.getElementById("progress").style.width = supportPercentage + "%";
+  document.getElementById("goal-text").innerText = "تم تحقيق " + supportPercentage + "% من الهدف الشهري 🎉";
+</script>
 
 </body>
 </html>
