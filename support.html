@@ -78,15 +78,21 @@
   <div class="progress-bar">
     <div class="progress-fill" id="progress"></div>
   </div>
-  <p class="goal-text" id="goal-text">تم تحقيق 0% من الهدف الشهري</p>
+  <p class="goal-text" id="goal-text">جارٍ تحميل البيانات...</p>
 </div>
 
 <script>
-  // مثال: جلب نسبة الدعم من ملف JSON أو API
-  // حالياً مجرد قيمة تجريبية
-  let supportPercentage = 65; // غيّرها حسب الإحصائيات الحقيقية
-  document.getElementById("progress").style.width = supportPercentage + "%";
-  document.getElementById("goal-text").innerText = "تم تحقيق " + supportPercentage + "% من الهدف الشهري 🎉";
+  // جلب البيانات من ملف stats.json
+  fetch("stats.json")
+    .then(response => response.json())
+    .then(data => {
+      let percentage = Math.round((data.current / data.goal) * 100);
+      document.getElementById("progress").style.width = percentage + "%";
+      document.getElementById("goal-text").innerText = "تم تحقيق " + percentage + "% من الهدف الشهري 🎉";
+    })
+    .catch(err => {
+      document.getElementById("goal-text").innerText = "تعذر تحميل البيانات ❌";
+    });
 </script>
 
 </body>
