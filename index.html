@@ -8,9 +8,16 @@
     body {
       margin:0;
       font-family:'Tajawal',sans-serif;
-      background:#0A0A0C;
+      background:linear-gradient(270deg,#0A0A0C,#121212,#0A0A0C);
+      background-size:600% 600%;
+      animation:gradientMove 20s ease infinite;
       color:#fff;
       overflow-x:hidden;
+    }
+    @keyframes gradientMove {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
     }
     header {
       background:#121212;
@@ -19,6 +26,7 @@
       position:sticky;
       top:0;
       z-index:1000;
+      box-shadow:0 0 15px rgba(255,46,46,0.5);
     }
     header img {
       height:70px;
@@ -36,20 +44,31 @@
       position:relative;
       transition:color 0.3s ease;
     }
+    nav a::after {
+      content:"";
+      position:absolute;
+      width:0%;
+      height:2px;
+      bottom:-5px;
+      left:0;
+      background:#FF2E2E;
+      transition:width 0.3s;
+    }
     nav a:hover {
       color:#FF2E2E;
+    }
+    nav a:hover::after {
+      width:100%;
     }
     .hero {
       text-align:center;
       padding:120px 20px;
-      background:url('logo.png') no-repeat center center;
-      background-size:250px;
       animation:fadeIn 2s ease;
     }
     .hero h1 {
       font-size:48px;
       margin-bottom:20px;
-      text-shadow:0 0 15px #007BFF;
+      text-shadow:0 0 20px #007BFF, 0 0 40px #FF2E2E;
       animation:slideDown 1.5s ease;
     }
     .hero button {
@@ -60,11 +79,13 @@
       font-size:18px;
       cursor:pointer;
       border-radius:8px;
+      box-shadow:0 0 20px #FF2E2E, 0 0 40px #FF2E2E;
       transition:transform 0.3s ease, background 0.3s ease;
     }
     .hero button:hover {
       transform:scale(1.1);
       background:#007BFF;
+      box-shadow:0 0 20px #007BFF, 0 0 40px #007BFF;
     }
     section {
       margin:60px auto;
@@ -73,7 +94,7 @@
       animation:fadeInUp 2s ease;
     }
     ul {list-style:none; padding:0;}
-    ul li {margin:10px 0; background:#1c1c1c; padding:10px; border-radius:6px;}
+    ul li {margin:10px 0; background:rgba(28,28,28,0.7); padding:10px; border-radius:6px;}
     .discord-highlight a {
       display:inline-block;
       margin-top:20px;
@@ -84,26 +105,31 @@
       text-decoration:none;
       font-weight:bold;
       transition:0.3s;
+      box-shadow:0 0 15px #007BFF;
     }
     .discord-highlight a:hover {
       background:#FF2E2E;
       transform:scale(1.1);
+      box-shadow:0 0 15px #FF2E2E;
     }
     footer {
       background:#121212;
       text-align:center;
       padding:20px;
       font-size:14px;
+      box-shadow:0 -5px 15px rgba(0,0,0,0.5);
     }
     @keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
     @keyframes slideDown {from{transform:translateY(-50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
     @keyframes fadeInUp {from{transform:translateY(50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
-    /* تنسيقات Dashboard */
+    /* Dashboard */
     .dashboard {
-      background:#1c1c1c;
+      background:rgba(28,28,28,0.6);
+      backdrop-filter:blur(10px);
       padding:20px;
-      border-radius:10px;
+      border-radius:15px;
       margin-top:40px;
+      box-shadow:0 0 20px rgba(255,46,46,0.5);
     }
     .progress-container {
       background:#333;
@@ -159,7 +185,6 @@
   </ul>
 </section>
 
-<!-- قسم إحصائيات البث -->
 <section class="dashboard">
   <h2>📊 إحصائيات البث</h2>
   <p>👥 المشاهدين الآن: <span id="viewers">جارٍ التحميل...</span></p>
@@ -190,28 +215,5 @@ async function loadStats() {
     document.getElementById("game").innerText = data.livestream?.session_title || "غير محدد";
     document.getElementById("status").innerText = data.livestream ? "أونلاين ✅" : "أوفلاين ❌";
 
-    // تحديث العداد الرسومي
-    let maxViewers = 500; // غيّر الرقم حسب أقصى عدد مشاهدين متوقع
-    let percent = Math.min((viewers / maxViewers) * 100, 100);
-    const bar = document.getElementById("viewerBar");
-    bar.style.width = percent + "%";
-
-    // تغيير اللون حسب عدد المشاهدين
-    if (viewers < 50) {
-      bar.style.background = "#4CAF50"; // أخضر
-    } else if (viewers < 200) {
-      bar.style.background = "#FFC107"; // أصفر
-    } else {
-      bar.style.background = "#FF2E2E"; // أحمر
-    }
-  } catch (err) {
-    document.getElementById("status").innerText = "تعذر تحميل البيانات ❌";
-  }
-}
-
-loadStats();
-setInterval(loadStats, 30000); // يحدث كل 30 ثانية
-</script>
-
-</body>
-</html>
+    let maxViewers = 500;
+    let percent = Math.min((viewers /
