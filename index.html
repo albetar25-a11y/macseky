@@ -98,6 +98,26 @@
     @keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
     @keyframes slideDown {from{transform:translateY(-50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
     @keyframes fadeInUp {from{transform:translateY(50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+    /* تنسيقات Dashboard */
+    .dashboard {
+      background:#1c1c1c;
+      padding:20px;
+      border-radius:10px;
+      margin-top:40px;
+    }
+    .progress-container {
+      background:#333;
+      border-radius:8px;
+      overflow:hidden;
+      width:300px;
+      height:20px;
+      margin:8px auto;
+    }
+    .progress-bar {
+      height:100%;
+      width:0%;
+      transition:width 0.5s;
+    }
   </style>
 </head>
 <body>
@@ -110,7 +130,6 @@
     <a href="rules.html">قوانين البث</a>
     <a href="videos.html">أحدث الفيديوهات</a>
     <a href="support.html"> الدعم المادي</a>
-
     <a href="shop.html">المتجر</a>
     <a href="contact.html">تواصل</a>
   </nav>
@@ -140,6 +159,17 @@
   </ul>
 </section>
 
+<!-- قسم إحصائيات البث -->
+<section class="dashboard">
+  <h2>📊 إحصائيات البث</h2>
+  <p>👥 المشاهدين الآن: <span id="viewers">جارٍ التحميل...</span></p>
+  <div class="progress-container">
+    <div id="viewerBar" class="progress-bar"></div>
+  </div>
+  <p>🎮 اللعبة الحالية: <span id="game">جارٍ التحميل...</span></p>
+  <p>📡 حالة البث: <span id="status">جارٍ التحميل...</span></p>
+</section>
+
 <section class="discord-highlight">
   <h2>انضم إلى مجتمعنا</h2>
   <a href="https://discord.gg/c8v3VfYcJ" target="_blank">💬 ادخل إلى Discord</a>
@@ -148,6 +178,40 @@
 <footer>
   © 2026 Macseky. جميع الحقوق محفوظة.
 </footer>
+
+<script>
+async function loadStats() {
+  try {
+    const res = await fetch("https://kick.com/api/v2/channels/macseky");
+    const data = await res.json();
+
+    let viewers = data.livestream?.viewer_count || 0;
+    document.getElementById("viewers").innerText = viewers;
+    document.getElementById("game").innerText = data.livestream?.session_title || "غير محدد";
+    document.getElementById("status").innerText = data.livestream ? "أونلاين ✅" : "أوفلاين ❌";
+
+    // تحديث العداد الرسومي
+    let maxViewers = 500; // غيّر الرقم حسب أقصى عدد مشاهدين متوقع
+    let percent = Math.min((viewers / maxViewers) * 100, 100);
+    const bar = document.getElementById("viewerBar");
+    bar.style.width = percent + "%";
+
+    // تغيير اللون حسب عدد المشاهدين
+    if (viewers < 50) {
+      bar.style.background = "#4CAF50"; // أخضر
+    } else if (viewers < 200) {
+      bar.style.background = "#FFC107"; // أصفر
+    } else {
+      bar.style.background = "#FF2E2E"; // أحمر
+    }
+  } catch (err) {
+    document.getElementById("status").innerText = "تعذر تحميل البيانات ❌";
+  }
+}
+
+loadStats();
+setInterval(loadStats, 30000); // يحدث كل 30 ثانية
+</script>
 
 </body>
 </html>
