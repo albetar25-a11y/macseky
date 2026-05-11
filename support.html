@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الدعم المادي - موقع يزن البيطار</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="navbar"></div>
+  <script>
+    fetch("navbar.html")
+      .then(response => response.text())
+      .then(data => document.getElementById("navbar").innerHTML = data);
+  </script>
+
+  <section class="support-section">
+    <h1>💖 الدعم المادي</h1>
+    <p>ساعدني أطور المحتوى أكثر من خلال دعمك بأي طريقة من الطرق التالية:</p>
+
+    <div class="support-buttons">
+      <a href="https://www.paypal.me/YourLink" target="_blank" class="btn-support">💳 PayPal</a>
+      <a href="https://www.patreon.com/YourLink" target="_blank" class="btn-support">⭐ Patreon</a>
+      <a href="https://www.buymeacoffee.com/YourLink" target="_blank" class="btn-support">☕ Buy Me a Coffee</a>
+    </div>
+
+    <div class="support-progress">
+      <h3>🎯 هدف الشهر</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 45%;"></div>
+      </div>
+      <p>تم تحقيق <strong>45%</strong> من الهدف الشهري! شكراً لكل الداعمين 🙏</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 يزن البيطار | جميع الحقوق محفوظة</p>
+  </footer>
+</body>
+</html>
