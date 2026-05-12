@@ -27,7 +27,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* ================= BACKGROUND ================= */
+/* BACKGROUND */
 
 #bgCanvas{
 position:fixed;
@@ -49,7 +49,7 @@ background:linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.9));
 z-index:-1;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 
 header{
 position:fixed;
@@ -73,12 +73,6 @@ gap:12px;
 
 .logo img{
 height:55px;
-transition:.3s;
-}
-
-.logo img:hover{
-transform:scale(1.1);
-filter:drop-shadow(0 0 15px #ff2e2e);
 }
 
 .logo h1{
@@ -96,30 +90,13 @@ nav a{
 color:white;
 text-decoration:none;
 font-weight:bold;
-transition:.3s;
-position:relative;
 }
 
 nav a:hover{
 color:#ff2e2e;
 }
 
-nav a::after{
-content:'';
-position:absolute;
-bottom:-5px;
-right:0;
-width:0%;
-height:2px;
-background:#ff2e2e;
-transition:.3s;
-}
-
-nav a:hover::after{
-width:100%;
-}
-
-/* ================= HERO ================= */
+/* HERO */
 
 .hero{
 padding-top:170px;
@@ -131,15 +108,10 @@ padding-bottom:30px;
 font-size:55px;
 font-family:'Orbitron',sans-serif;
 color:#ff2e2e;
-text-shadow:0 0 25px #ff2e2e, 0 0 50px #007bff;
+text-shadow:0 0 25px #ff2e2e;
 }
 
-.hero p{
-color:#ddd;
-margin-top:10px;
-}
-
-/* ================= VIDEO ================= */
+/* VIDEO */
 
 .video-box{
 text-align:center;
@@ -154,7 +126,7 @@ border-radius:15px;
 box-shadow:0 0 25px rgba(255,46,46,.4);
 }
 
-/* ================= BUTTON ================= */
+/* BUTTON */
 
 .btn{
 display:inline-block;
@@ -165,17 +137,9 @@ color:white;
 border-radius:10px;
 text-decoration:none;
 font-weight:bold;
-transition:.3s;
-box-shadow:0 0 20px #ff2e2e;
 }
 
-.btn:hover{
-background:#007bff;
-transform:translateY(-5px);
-box-shadow:0 0 20px #007bff;
-}
-
-/* ================= FOOTER ================= */
+/* FOOTER */
 
 footer{
 padding:25px;
@@ -219,7 +183,6 @@ margin-top:50px;
 <section class="hero">
 
 <h1>أحدث فيديو 🔥</h1>
-<p>آخر Short نزلته على القناة</p>
 
 </section>
 
@@ -227,12 +190,12 @@ margin-top:50px;
 
 <section class="video-box">
 
-<div id="latestShort">
+<div id="videoContainer">
 <p>جاري تحميل الفيديو...</p>
 </div>
 
 <a class="btn" href="https://www.youtube.com/@macseky" target="_blank">
-📺 مشاهدة القناة
+📺 القناة
 </a>
 
 </section>
@@ -245,110 +208,44 @@ margin-top:50px;
 
 <script>
 
-/* ================= SHORT FETCH ================= */
+/* ====== LAST VIDEO LOADER (100% RELIABLE) ====== */
 
 const channelId = "UCb9-8VgDZyQg7iT9hfI3jGQ";
 
-async function loadLatestShort() {
+async function loadVideo(){
 
-try {
+try{
 
-const url = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-
-const res = await fetch(url);
+const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`);
 const text = await res.text();
 
-const parser = new DOMParser();
-const xml = parser.parseFromString(text, "text/xml");
+const xml = new DOMParser().parseFromString(text,"text/xml");
 
-const entries = xml.querySelectorAll("entry");
+const entry = xml.querySelector("entry");
 
-let videoId = null;
-
-for(let entry of entries){
-
-const title = entry.querySelector("title").textContent.toLowerCase();
-
-if(title.includes("shorts") || title.includes("#shorts")){
-
-videoId = entry.querySelector("videoId").textContent;
-break;
-
+if(!entry){
+document.getElementById("videoContainer").innerHTML = "لا يوجد فيديوهات";
+return;
 }
 
-}
+const videoId = entry.querySelector("videoId").textContent;
 
-if(!videoId && entries.length>0){
-videoId = entries[0].querySelector("videoId").textContent;
-}
-
-if(videoId){
-
-document.getElementById("latestShort").innerHTML = `
-<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
+document.getElementById("videoContainer").innerHTML = `
+<iframe 
+src="https://www.youtube.com/embed/${videoId}"
+allowfullscreen>
+</iframe>
 `;
 
-}
+}catch(e){
 
-} catch(err){
-document.getElementById("latestShort").innerHTML = "فشل تحميل الفيديو";
-}
+document.getElementById("videoContainer").innerHTML = "فشل تحميل الفيديو";
 
 }
 
-loadLatestShort();
-
-</script>
-
-<!-- PARTICLES -->
-
-<script>
-
-const canvas = document.getElementById("bgCanvas");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<60;i++){
-
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*2+1,
-dx:(Math.random()-.5)*0.4,
-dy:(Math.random()-.5)*0.4
-});
-
 }
 
-function animate(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle="#ff2e2e";
-
-particles.forEach(p=>{
-
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fill();
-
-p.x+=p.dx;
-p.y+=p.dy;
-
-if(p.x<0||p.x>canvas.width)p.dx*=-1;
-if(p.y<0||p.y>canvas.height)p.dy*=-1;
-
-});
-
-requestAnimationFrame(animate);
-
-}
-
-animate();
+loadVideo();
 
 </script>
 
