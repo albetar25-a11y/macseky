@@ -2,16 +2,19 @@
 <html lang="ar" dir="rtl">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Macseky</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" type="image/png" href="logo.png"/>
+<title>Macseky - الرئيسية</title>
+
+<link rel="icon" type="image/png" href="logo.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* ================= RESET ================= */
 
 *{
 margin:0;
@@ -26,37 +29,14 @@ color:white;
 overflow-x:hidden;
 }
 
-/* ================= VIDEO ================= */
+/* ================= BACKGROUND ================= */
 
-.video-bg{
+#bgCanvas{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-z-index:-3;
-overflow:hidden;
-}
-
-#bgVideo{
-width:100%;
-height:100%;
-object-fit:cover;
-opacity:.35;
-}
-
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:
-linear-gradient(
-to bottom,
-rgba(0,0,0,.7),
-rgba(0,0,0,.85)
-);
 z-index:-2;
 }
 
@@ -72,31 +52,18 @@ justify-content:space-between;
 align-items:center;
 background:rgba(10,10,10,.55);
 backdrop-filter:blur(10px);
-z-index:999;
 border-bottom:1px solid rgba(255,255,255,.08);
+z-index:999;
 }
 
-.logo{
-display:flex;
-align-items:center;
-gap:12px;
-}
-
-.logo img{
+header img{
 height:55px;
-transition:.4s;
+transition:.3s;
 }
 
-.logo img:hover{
+header img:hover{
 transform:scale(1.1);
 filter:drop-shadow(0 0 15px #ff2e2e);
-}
-
-.logo h1{
-font-family:'Orbitron',sans-serif;
-font-size:26px;
-color:white;
-letter-spacing:2px;
 }
 
 nav{
@@ -110,166 +77,125 @@ color:white;
 text-decoration:none;
 font-weight:bold;
 transition:.3s;
-position:relative;
 }
 
 nav a:hover{
 color:#ff2e2e;
 }
 
-nav a::after{
-content:'';
-position:absolute;
-bottom:-5px;
-right:0;
-width:0%;
-height:2px;
-background:#ff2e2e;
-transition:.3s;
-}
-
-nav a:hover::after{
-width:100%;
-}
-
 /* ================= HERO ================= */
 
 .hero{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
+padding-top:180px;
 text-align:center;
-padding:120px 20px 40px;
+padding-bottom:60px;
 }
 
-.hero-content{
-max-width:900px;
-animation:fadeUp 1.5s ease;
-}
-
-.live-badge{
-display:inline-block;
-background:#ff2e2e;
-padding:8px 18px;
-border-radius:50px;
-font-weight:bold;
-margin-bottom:25px;
-box-shadow:0 0 20px #ff2e2e;
-animation:pulse 2s infinite;
-}
-
-.hero h2{
-font-size:65px;
+.hero h1{
+font-size:55px;
 font-family:'Orbitron',sans-serif;
-margin-bottom:20px;
-text-shadow:
-0 0 15px #ff2e2e,
-0 0 35px #007bff;
+color:#ff2e2e;
+text-shadow:0 0 25px #ff2e2e;
 }
 
-.hero p{
-font-size:22px;
-color:#ddd;
-margin-bottom:35px;
-line-height:1.8;
-}
-
-.hero-buttons{
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:15px 32px;
+.hero button{
+margin-top:20px;
+padding:15px 30px;
 border:none;
 border-radius:10px;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-transition:.3s;
-text-decoration:none;
-}
-
-.btn-live{
 background:#ff2e2e;
 color:white;
+font-size:18px;
+cursor:pointer;
+transition:.3s;
 box-shadow:0 0 20px #ff2e2e;
 }
 
-.btn-live:hover{
-transform:translateY(-5px);
+.hero button:hover{
+transform:scale(1.1);
 background:#007bff;
-box-shadow:0 0 20px #007bff;
 }
 
-.btn-discord{
-background:#5865F2;
-color:white;
-box-shadow:0 0 20px #5865F2;
-}
+/* ================= SECTIONS ================= */
 
-.btn-discord:hover{
-transform:translateY(-5px);
-}
-
-/* ================= STATS ================= */
-
-.stats{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-padding:60px 30px;
-max-width:1200px;
-margin:auto;
-}
-
-.card{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(12px);
-padding:30px;
-border-radius:20px;
+section{
 text-align:center;
-transition:.4s;
-}
-
-.card:hover{
-transform:translateY(-8px);
-box-shadow:0 0 25px rgba(255,46,46,.3);
-}
-
-.card h3{
-font-size:20px;
-margin-bottom:15px;
-color:#ff2e2e;
-}
-
-.card p{
-font-size:28px;
-font-weight:bold;
-}
-
-/* ================= ABOUT ================= */
-
-.about{
-padding:80px 25px;
+margin:50px auto;
 max-width:900px;
-margin:auto;
-text-align:center;
 }
 
-.about h2{
-font-size:40px;
-margin-bottom:25px;
+/* ================= DASHBOARD ================= */
+
+.dashboard{
+background:rgba(255,255,255,.05);
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(255,46,46,.2);
 }
 
-.about p{
-font-size:20px;
-line-height:2;
-color:#ddd;
+.progress-container{
+width:80%;
+height:20px;
+background:#222;
+margin:10px auto;
+border-radius:10px;
+overflow:hidden;
+}
+
+.progress-bar{
+height:100%;
+width:0%;
+background:#ff2e2e;
+transition:.5s;
+}
+
+/* ================= SUPPORT ================= */
+
+.support{
+background:rgba(255,255,255,.05);
+padding:30px;
+border-radius:15px;
+margin-top:50px;
+box-shadow:0 0 20px rgba(255,46,46,.2);
+}
+
+.support h2{
+color:#ff2e2e;
+margin-bottom:20px;
+}
+
+.support a{
+display:inline-block;
+margin:10px;
+padding:12px 25px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+.paypal{
+background:#0070ba;
+color:white;
+}
+
+.coffee{
+background:#ff2e2e;
+color:white;
+}
+
+.support a:hover{
+transform:scale(1.1);
+}
+
+/* ================= VIDEO ================= */
+
+iframe{
+width:80%;
+height:450px;
+border:none;
+border-radius:15px;
+box-shadow:0 0 20px rgba(255,46,46,.3);
 }
 
 /* ================= FOOTER ================= */
@@ -282,75 +208,26 @@ background:rgba(0,0,0,.6);
 border-top:1px solid rgba(255,255,255,.08);
 }
 
-/* ================= ANIMATIONS ================= */
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.06);}
-100%{transform:scale(1);}
-}
-
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(50px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:768px){
-
-header{
-flex-direction:column;
-gap:15px;
-}
-
-.hero h2{
-font-size:42px;
-}
-
-.hero p{
-font-size:18px;
-}
-
-nav{
-justify-content:center;
-}
-
-}
-
 </style>
+
 </head>
 
 <body>
 
-<!-- VIDEO -->
-
-<div class="video-bg">
-<video id="bgVideo" autoplay muted playsinline></video>
-</div>
-
-<div class="overlay"></div>
+<canvas id="bgCanvas"></canvas>
 
 <!-- HEADER -->
 
 <header>
 
-<div class="logo">
 <img src="logo.png">
-<h1>MACSEKY</h1>
-</div>
 
 <nav>
-<a href="#">الرئيسية</a>
+<a href="index.html">🏠 الرئيسية</a>
 <a href="about.html">من أنا</a>
-<a href="videos.html">الفيديوهات</a>
-<a href="rules.html">القوانين</a>
+<a href="rules.html">قوانين</a>
+<a href="videos.html">فيديوهات</a>
+<a href="support.html">💖 الدعم</a>
 <a href="shop.html">المتجر</a>
 <a href="contact.html">تواصل</a>
 </nav>
@@ -361,84 +238,58 @@ justify-content:center;
 
 <section class="hero">
 
-<div class="hero-content">
+<h1>MACSEKY LIVE 🔥</h1>
 
-<div class="live-badge">
-🔴 LIVE STREAMER
+<button onclick="window.open('https://kick.com/macseky','_blank')">
+شاهد البث الآن
+</button>
+
+</section>
+
+<!-- DASHBOARD -->
+
+<section class="dashboard">
+
+<h2>📊 إحصائيات البث</h2>
+
+<p>👥 المشاهدين: <span id="viewers">0</span></p>
+
+<div class="progress-container">
+<div class="progress-bar" id="bar"></div>
 </div>
 
-<h2>MACSEKY</h2>
+<p>🎮 اللعبة: <span id="game">...</span></p>
+<p>📡 الحالة: <span id="status">...</span></p>
 
-<p>
-Jordanian Streamer • Gamer • Boxer
-<br>
-بثوث يومية وأقوى لحظات الـ GTA RP والألعاب
-</p>
+</section>
 
-<div class="hero-buttons">
+<!-- VIDEO -->
 
-<a class="btn btn-live"
-href="https://kick.com/macseky"
-target="_blank">
+<section>
 
-🎥 شاهد البث
+<h2>🎥 آخر فيديو</h2>
 
-</a>
-
-<a class="btn btn-discord"
-href="https://discord.gg/c8v3VfYcJ"
-target="_blank">
-
-💬 Discord
-
-</a>
-
-</div>
-
+<div id="video">
+<p>جاري التحميل...</p>
 </div>
 
 </section>
 
-<!-- STATS -->
+<!-- SUPPORT -->
 
-<section class="stats">
+<section class="support">
 
-<div class="card">
-<h3>👥 المشاهدين</h3>
-<p id="viewers">127</p>
-</div>
+<h2>💖 دعم البث</h2>
 
-<div class="card">
-<h3>🎮 اللعبة الحالية</h3>
-<p id="game">GTA RP</p>
-</div>
+<p>دعمك يساعدني أستمر وأطور المحتوى 🔥</p>
 
-<div class="card">
-<h3>📡 الحالة</h3>
-<p id="status">LIVE</p>
-</div>
+<a class="paypal" href="https://streamlabs.com/maacseky/tip" target="_blank">
+💳 PayPal
+</a>
 
-<div class="card">
-<h3>⏰ وقت البث</h3>
-<p>8 PM</p>
-</div>
-
-</section>
-
-<!-- ABOUT -->
-
-<section class="about">
-
-<h2>من أنا</h2>
-
-<p>
-
-أنا يزن المعروف باسم Macseky،
-صانع محتوى ولاعب ملاكمة من الأردن،
-أقدم بثوث يومية على Kick
-ومحتوى Gaming وGTA RP.
-
-</p>
+<a class="coffee" href="https://buymeacoffee.com/" target="_blank">
+☕ Buy Me a Coffee
+</a>
 
 </section>
 
@@ -450,69 +301,97 @@ target="_blank">
 
 <script>
 
-/* ================= VIDEOS ================= */
+/* ================= STATS ================= */
 
-const videos = [
-"videos/video3.mp4",
-"videos/video4.mp4",
-"videos/video5.mp4",
-"videos/video6.mp4"
-];
+async function loadStats(){
 
-const video = document.getElementById("bgVideo");
+try{
 
-let currentVideo = 0;
+const res = await fetch("https://kick.com/api/v1/channels/macseky");
+const data = await res.json();
 
-function playVideo(index){
+document.getElementById("viewers").innerText = data.viewers_count || 0;
+document.getElementById("game").innerText = data.livestream?.category?.name || "غير متوفر";
+document.getElementById("status").innerText = data.livestream ? "🟢 مباشر" : "🔴 أوفلاين";
 
-video.src = videos[index];
+let percent = Math.min(data.viewers_count || 0, 100);
+document.getElementById("bar").style.width = percent + "%";
 
-video.play();
+}catch(e){
+console.log("error stats");
+}
 
 }
 
-playVideo(currentVideo);
+loadStats();
+setInterval(loadStats,10000);
 
-/* تشغيل الفيديو التالي بعد انتهاء الحالي */
+/* ================= YOUTUBE LAST VIDEO ================= */
 
-video.addEventListener("ended",()=>{
+const channelId = "UCb9-8VgDZyQg7iT9hfI3jGQ";
 
-currentVideo++;
+async function loadVideo(){
 
-if(currentVideo >= videos.length){
-currentVideo = 0;
+const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`);
+const text = await res.text();
+
+const xml = new DOMParser().parseFromString(text,"text/xml");
+
+const id = xml.querySelector("entry videoId").textContent;
+
+document.getElementById("video").innerHTML = `
+<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>
+`;
+
 }
 
-playVideo(currentVideo);
+loadVideo();
+
+/* ================= PARTICLES ================= */
+
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<60;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2+1,
+dx:(Math.random()-.5)*0.4,
+dy:(Math.random()-.5)*0.4
+});
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#ff2e2e";
+
+particles.forEach(p=>{
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+
+p.x+=p.dx;
+p.y+=p.dy;
+
+if(p.x<0||p.x>canvas.width)p.dx*=-1;
+if(p.y<0||p.y>canvas.height)p.dy*=-1;
 
 });
 
-/* ================= FAKE LIVE STATS ================= */
-
-function randomStats(){
-
-const viewers =
-Math.floor(Math.random()*120)+50;
-
-document.getElementById("viewers").innerText =
-viewers;
-
-const games = [
-"GTA RP",
-"Phasmophobia",
-"Valorant",
-"FiveM"
-];
-
-const randomGame =
-games[Math.floor(Math.random()*games.length)];
-
-document.getElementById("game").innerText =
-randomGame;
+requestAnimationFrame(animate);
 
 }
 
-setInterval(randomStats,7000);
+animate();
 
 </script>
 
