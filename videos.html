@@ -236,9 +236,9 @@ border-top:1px solid rgba(255,255,255,.08);
 الحل الحقيقي: جلب آخر فيديو من القناة عبر RSS (بدون API key)
 */
 
-const channelId = "UCb9-8VgDZyQg7iT9hfI3jGQ";
+const channelName = "macseky";
 
-fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`)
+fetch(`https://www.youtube.com/feeds/videos.xml?user=USERNAME`)
 .then(res => res.text())
 .then(str => {
 const parser = new DOMParser();
