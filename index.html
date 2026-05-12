@@ -35,16 +35,19 @@
     .dashboard {background:rgba(28,28,28,0.6); backdrop-filter:blur(10px); padding:20px; border-radius:15px; margin-top:40px; box-shadow:0 0 20px rgba(255,46,46,0.5);}
     .progress-container {background:#333; border-radius:8px; overflow:hidden; width:300px; height:20px; margin:8px auto;}
     .progress-bar {height:100%; width:0%; transition:width 0.5s;}
-    .video-bg {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2; overflow:hidden;}
+    .video-bg {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-3; overflow:hidden;}
     video {width:100%; height:100%; object-fit:cover; transition:opacity 1s ease-in-out;}
+    .video-overlay {position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:-2;}
     #bgCanvas {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background:transparent;}
   </style>
 </head>
 <body>
 
 <div class="video-bg">
-  <video id="bgVideo" autoplay muted playsinline></video>
+  <!-- الصوت شغال (muted محذوف) -->
+  <video id="bgVideo" autoplay playsinline></video>
 </div>
+<div class="video-overlay"></div>
 <canvas id="bgCanvas"></canvas>
 
 <header>
@@ -113,23 +116,4 @@
     videoElement.style.opacity = 0;
     setTimeout(() => {
       videoElement.src = videos[index];
-      videoElement.play();
-      videoElement.style.opacity = 1;
-    }, 1000);
-  }
-
-  // تشغيل أول فيديو
-  playVideo(currentIndex);
-
-  // تبديل الفيديو كل 25 ثانية
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % videos.length;
-    playVideo(currentIndex);
-  }, 25000);
-</script>
-
-<script>
-async function loadStats() {
-  try {
-    const res = await fetch("https://kick.com/api/v2/channels/macseky");
-    const data = await res
+      video
