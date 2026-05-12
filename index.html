@@ -37,14 +37,13 @@
     .progress-bar {height:100%; width:0%; transition:width 0.5s;}
     .video-bg {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-3; overflow:hidden;}
     video {width:100%; height:100%; object-fit:cover; transition:opacity 1s ease-in-out;}
-    .video-overlay {position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3); z-index:-2;}
+    .video-overlay {position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:-2;}
     #bgCanvas {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background:transparent;}
   </style>
 </head>
 <body>
 
 <div class="video-bg">
-  <!-- Muted عشان autoplay يشتغل -->
   <video id="bgVideo" autoplay muted playsinline></video>
 </div>
 <div class="video-overlay"></div>
@@ -109,4 +108,23 @@
     "videos/video8.mp4"
   ];
 
-  let currentIndex =
+  let currentIndex = 0;
+  const videoElement = document.getElementById("bgVideo");
+
+  function playVideo(index) {
+    videoElement.style.opacity = 0;
+    setTimeout(() => {
+      videoElement.src = videos[index];
+      videoElement.play();
+      videoElement.style.opacity = 1;
+    }, 1000);
+  }
+
+  // تشغيل أول فيديو
+  playVideo(currentIndex);
+
+  // تبديل الفيديو كل 25 ثانية
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % videos.length;
+    playVideo(currentIndex);
+  }, 250
