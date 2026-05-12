@@ -2,17 +2,16 @@
 <html lang="ar" dir="rtl">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Macseky - الرئيسية</title>
-<link rel="icon" type="image/png" href="logo.png">
+<title>Macseky</title>
+
+<link rel="icon" type="image/png" href="logo.png"/>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* ================= BASE ================= */
 
 *{
 margin:0;
@@ -27,7 +26,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* ================= BACKGROUND VIDEO (FIXED) ================= */
+/* ================= VIDEO ================= */
 
 .video-bg{
 position:fixed;
@@ -43,17 +42,21 @@ overflow:hidden;
 width:100%;
 height:100%;
 object-fit:cover;
-filter:brightness(0.4);
+opacity:.35;
 }
 
-/* ================= PARTICLES BG ================= */
-
-#bgCanvas{
+.overlay{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
+background:
+linear-gradient(
+to bottom,
+rgba(0,0,0,.7),
+rgba(0,0,0,.85)
+);
 z-index:-2;
 }
 
@@ -63,21 +66,42 @@ header{
 position:fixed;
 top:0;
 width:100%;
-padding:15px 25px;
+padding:15px 30px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:rgba(10,10,10,.6);
+background:rgba(10,10,10,.55);
 backdrop-filter:blur(10px);
-border-bottom:1px solid rgba(255,255,255,.08);
 z-index:999;
+border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-header img{height:55px;}
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo img{
+height:55px;
+transition:.4s;
+}
+
+.logo img:hover{
+transform:scale(1.1);
+filter:drop-shadow(0 0 15px #ff2e2e);
+}
+
+.logo h1{
+font-family:'Orbitron',sans-serif;
+font-size:26px;
+color:white;
+letter-spacing:2px;
+}
 
 nav{
 display:flex;
-gap:15px;
+gap:18px;
 flex-wrap:wrap;
 }
 
@@ -86,266 +110,409 @@ color:white;
 text-decoration:none;
 font-weight:bold;
 transition:.3s;
+position:relative;
 }
 
-nav a:hover{color:#ff2e2e;}
+nav a:hover{
+color:#ff2e2e;
+}
+
+nav a::after{
+content:'';
+position:absolute;
+bottom:-5px;
+right:0;
+width:0%;
+height:2px;
+background:#ff2e2e;
+transition:.3s;
+}
+
+nav a:hover::after{
+width:100%;
+}
 
 /* ================= HERO ================= */
 
 .hero{
-padding-top:180px;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 text-align:center;
-padding-bottom:40px;
+padding:120px 20px 40px;
 }
 
-.hero h1{
-font-size:55px;
+.hero-content{
+max-width:900px;
+animation:fadeUp 1.5s ease;
+}
+
+.live-badge{
+display:inline-block;
+background:#ff2e2e;
+padding:8px 18px;
+border-radius:50px;
+font-weight:bold;
+margin-bottom:25px;
+box-shadow:0 0 20px #ff2e2e;
+animation:pulse 2s infinite;
+}
+
+.hero h2{
+font-size:65px;
 font-family:'Orbitron',sans-serif;
-color:#ff2e2e;
-text-shadow:0 0 25px #ff2e2e;
+margin-bottom:20px;
+text-shadow:
+0 0 15px #ff2e2e,
+0 0 35px #007bff;
 }
 
-.hero button{
-margin-top:20px;
-padding:14px 28px;
+.hero p{
+font-size:22px;
+color:#ddd;
+margin-bottom:35px;
+line-height:1.8;
+}
+
+.hero-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 32px;
 border:none;
 border-radius:10px;
-background:#ff2e2e;
-color:white;
-font-size:16px;
+font-size:18px;
+font-weight:bold;
 cursor:pointer;
 transition:.3s;
+text-decoration:none;
+}
+
+.btn-live{
+background:#ff2e2e;
+color:white;
 box-shadow:0 0 20px #ff2e2e;
 }
 
-.hero button:hover{
-transform:scale(1.1);
+.btn-live:hover{
+transform:translateY(-5px);
 background:#007bff;
+box-shadow:0 0 20px #007bff;
 }
 
-/* ================= SECTIONS ================= */
-
-section{
-text-align:center;
-margin:40px auto;
-max-width:900px;
-}
-
-/* ================= DASHBOARD ================= */
-
-.dashboard{
-background:rgba(255,255,255,.05);
-padding:20px;
-border-radius:15px;
-box-shadow:0 0 20px rgba(255,46,46,.2);
-}
-
-.bar{
-width:80%;
-height:18px;
-background:#222;
-margin:10px auto;
-border-radius:10px;
-overflow:hidden;
-}
-
-.fill{
-height:100%;
-width:0%;
-background:#ff2e2e;
-transition:.5s;
-}
-
-/* ================= VIDEO ================= */
-
-iframe{
-width:85%;
-height:420px;
-border:none;
-border-radius:15px;
-box-shadow:0 0 20px rgba(255,46,46,.3);
-}
-
-/* ================= SUPPORT ================= */
-
-.support{
-background:rgba(255,255,255,.05);
-padding:25px;
-border-radius:15px;
-box-shadow:0 0 20px rgba(255,46,46,.2);
-}
-
-.support h2{color:#ff2e2e;}
-
-.support a{
-display:inline-block;
-margin:10px;
-padding:12px 22px;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
+.btn-discord{
+background:#5865F2;
 color:white;
-transition:.3s;
+box-shadow:0 0 20px #5865F2;
 }
 
-.paypal{background:#0070ba;}
-.coffee{background:#ff2e2e;}
+.btn-discord:hover{
+transform:translateY(-5px);
+}
 
-.support a:hover{transform:scale(1.1);}
+/* ================= STATS ================= */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+padding:60px 30px;
+max-width:1200px;
+margin:auto;
+}
+
+.card{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+padding:30px;
+border-radius:20px;
+text-align:center;
+transition:.4s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 25px rgba(255,46,46,.3);
+}
+
+.card h3{
+font-size:20px;
+margin-bottom:15px;
+color:#ff2e2e;
+}
+
+.card p{
+font-size:28px;
+font-weight:bold;
+}
+
+/* ================= ABOUT ================= */
+
+.about{
+padding:80px 25px;
+max-width:900px;
+margin:auto;
+text-align:center;
+}
+
+.about h2{
+font-size:40px;
+margin-bottom:25px;
+}
+
+.about p{
+font-size:20px;
+line-height:2;
+color:#ddd;
+}
 
 /* ================= FOOTER ================= */
 
 footer{
-margin-top:50px;
-padding:20px;
+margin-top:60px;
+padding:25px;
+text-align:center;
 background:rgba(0,0,0,.6);
 border-top:1px solid rgba(255,255,255,.08);
-text-align:center;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.06);}
+100%{transform:scale(1);}
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:15px;
+}
+
+.hero h2{
+font-size:42px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+nav{
+justify-content:center;
+}
+
 }
 
 </style>
-
 </head>
 
 <body>
 
-<!-- ================= BACKGROUND VIDEO FIX ================= -->
+<!-- VIDEO -->
 
 <div class="video-bg">
 <video id="bgVideo" autoplay muted playsinline></video>
 </div>
 
-<canvas id="bgCanvas"></canvas>
+<div class="overlay"></div>
+
+<!-- HEADER -->
 
 <header>
 
+<div class="logo">
 <img src="logo.png">
+<h1>MACSEKY</h1>
+</div>
 
 <nav>
-<a href="index.html">🏠 الرئيسية</a>
+<a href="#">الرئيسية</a>
 <a href="about.html">من أنا</a>
-<a href="rules.html">القوانين</a>
 <a href="videos.html">الفيديوهات</a>
-<a href="support.html">💖 الدعم</a>
+<a href="rules.html">القوانين</a>
 <a href="shop.html">المتجر</a>
 <a href="contact.html">تواصل</a>
 </nav>
 
 </header>
 
+<!-- HERO -->
+
 <section class="hero">
 
-<h1>MACSEKY LIVE 🔥</h1>
+<div class="hero-content">
 
-<button onclick="window.open('https://kick.com/macseky','_blank')">
-شاهد البث الآن
-</button>
+<div class="live-badge">
+🔴 LIVE STREAMER
+</div>
+
+<h2>MACSEKY</h2>
+
+<p>
+Jordanian Streamer • Gamer • Boxer
+<br>
+بثوث يومية وأقوى لحظات الـ GTA RP والألعاب
+</p>
+
+<div class="hero-buttons">
+
+<a class="btn btn-live"
+href="https://kick.com/macseky"
+target="_blank">
+
+🎥 شاهد البث
+
+</a>
+
+<a class="btn btn-discord"
+href="https://discord.gg/c8v3VfYcJ"
+target="_blank">
+
+💬 Discord
+
+</a>
+
+</div>
+
+</div>
 
 </section>
 
-<section class="dashboard">
+<!-- STATS -->
 
-<h2>📊 الإحصائيات</h2>
+<section class="stats">
 
-<p>👥 المشاهدين: <span id="viewers">0</span></p>
+<div class="card">
+<h3>👥 المشاهدين</h3>
+<p id="viewers">127</p>
+</div>
 
-<div class="bar"><div class="fill" id="bar"></div></div>
+<div class="card">
+<h3>🎮 اللعبة الحالية</h3>
+<p id="game">GTA RP</p>
+</div>
 
-<p>🎮 اللعبة: <span id="game">...</span></p>
-<p>📡 الحالة: <span id="status">...</span></p>
+<div class="card">
+<h3>📡 الحالة</h3>
+<p id="status">LIVE</p>
+</div>
+
+<div class="card">
+<h3>⏰ وقت البث</h3>
+<p>8 PM</p>
+</div>
 
 </section>
 
-<section class="support">
+<!-- ABOUT -->
 
-<h2>💖 الدعم</h2>
+<section class="about">
 
-<a class="paypal" href="https://streamlabs.com/maacseky/tip">PayPal</a>
-<a class="coffee" href="https://buymeacoffee.com/">Coffee</a>
+<h2>من أنا</h2>
+
+<p>
+
+أنا يزن المعروف باسم Macseky،
+صانع محتوى ولاعب ملاكمة من الأردن،
+أقدم بثوث يومية على Kick
+ومحتوى Gaming وGTA RP.
+
+</p>
 
 </section>
+
+<!-- FOOTER -->
 
 <footer>
-© 2026 MACSEKY
+© 2026 MACSEKY — ALL RIGHTS RESERVED
 </footer>
 
 <script>
 
-/* ================= BACKGROUND VIDEO FIX SCRIPT ================= */
+/* ================= VIDEOS ================= */
 
 const videos = [
-"videos/video1.mp4",
-"videos/video2.mp4",
-"videos/video3.mp4"
+"videos/video3.mp4",
+"videos/video4.mp4",
+"videos/video5.mp4",
+"videos/video6.mp4"
 ];
 
 const video = document.getElementById("bgVideo");
 
-let index = 0;
+let currentVideo = 0;
 
-function playVideo(){
+function playVideo(index){
 
 video.src = videos[index];
-video.load();
 
-video.play().catch(()=>{});
-
-index++;
-
-if(index >= videos.length){
-index = 0;
-}
+video.play();
 
 }
 
-playVideo();
+playVideo(currentVideo);
 
-setInterval(playVideo,30000);
+/* تشغيل الفيديو التالي بعد انتهاء الحالي */
 
-/* ================= PARTICLES ================= */
+video.addEventListener("ended",()=>{
 
-const canvas = document.getElementById("bgCanvas");
-const ctx = canvas.getContext("2d");
+currentVideo++;
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<60;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*2+1,
-dx:(Math.random()-.5)*0.4,
-dy:(Math.random()-.5)*0.4
-});
+if(currentVideo >= videos.length){
+currentVideo = 0;
 }
 
-function animate(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle="#ff2e2e";
-
-particles.forEach(p=>{
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fill();
-
-p.x+=p.dx;
-p.y+=p.dy;
-
-if(p.x<0||p.x>canvas.width)p.dx*=-1;
-if(p.y<0||p.y>canvas.height)p.dy*=-1;
+playVideo(currentVideo);
 
 });
 
-requestAnimationFrame(animate);
+/* ================= FAKE LIVE STATS ================= */
+
+function randomStats(){
+
+const viewers =
+Math.floor(Math.random()*120)+50;
+
+document.getElementById("viewers").innerText =
+viewers;
+
+const games = [
+"GTA RP",
+"Phasmophobia",
+"Valorant",
+"FiveM"
+];
+
+const randomGame =
+games[Math.floor(Math.random()*games.length)];
+
+document.getElementById("game").innerText =
+randomGame;
 
 }
 
-animate();
+setInterval(randomStats,7000);
 
 </script>
 
