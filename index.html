@@ -2,510 +2,519 @@
 <html lang="ar" dir="rtl">
 
 <head>
-  <meta charset="UTF-8" />
-  <title>Macseky</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <link rel="icon" type="image/png" href="logo.png" />
+<title>Macseky</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Tajawal', sans-serif;
-      background: #0A0A0C;
-      color: #fff;
-      overflow-x: hidden;
-    }
+<link rel="icon" type="image/png" href="logo.png"/>
 
-    /* ================= VIDEO BACKGROUND ================= */
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 
-    .video-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -3;
-      overflow: hidden;
-    }
+<style>
 
-    #bgVideo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 1;
-      transition: opacity 1s ease-in-out;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-    .video-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.55);
-      z-index: -2;
-    }
+body{
+font-family:'Tajawal',sans-serif;
+background:#050507;
+color:white;
+overflow-x:hidden;
+}
 
-    #bgCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: transparent;
-    }
+/* ================= VIDEO ================= */
 
-    /* ================= HEADER ================= */
+.video-bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-3;
+overflow:hidden;
+}
 
-    header {
-      background: #121212;
-      padding: 15px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 0 15px rgba(255, 46, 46, 0.5);
-    }
+#bgVideo{
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:.35;
+}
 
-    header img {
-      height: 70px;
-      transition:
-        transform 0.6s ease,
-        filter 0.6s ease;
-    }
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+linear-gradient(
+to bottom,
+rgba(0,0,0,.7),
+rgba(0,0,0,.85)
+);
+z-index:-2;
+}
 
-    header img:hover {
-      transform: scale(1.2) rotate(-5deg);
-      filter: drop-shadow(0 0 15px #FF2E2E);
-    }
+/* ================= HEADER ================= */
 
-    nav a {
-      color: #fff;
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: bold;
-      position: relative;
-      transition: color 0.3s ease;
-    }
+header{
+position:fixed;
+top:0;
+width:100%;
+padding:15px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(10,10,10,.55);
+backdrop-filter:blur(10px);
+z-index:999;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
 
-    nav a::after {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background: #FF2E2E;
-      transition: width 0.3s;
-    }
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
 
-    nav a:hover {
-      color: #FF2E2E;
-    }
+.logo img{
+height:55px;
+transition:.4s;
+}
 
-    nav a:hover::after {
-      width: 100%;
-    }
+.logo img:hover{
+transform:scale(1.1);
+filter:drop-shadow(0 0 15px #ff2e2e);
+}
 
-    /* ================= HERO ================= */
+.logo h1{
+font-family:'Orbitron',sans-serif;
+font-size:26px;
+color:white;
+letter-spacing:2px;
+}
 
-    .hero {
-      text-align: center;
-      padding: 120px 20px;
-      animation: fadeIn 2s ease;
-      position: relative;
-      z-index: 1;
-    }
+nav{
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
 
-    .hero h1 {
-      font-size: 52px;
-      margin-bottom: 20px;
-      text-shadow:
-        0 0 25px #FF2E2E,
-        0 0 40px #007BFF;
-      animation: slideDown 1.5s ease;
-    }
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+position:relative;
+}
 
-    .hero button {
-      background: #FF2E2E;
-      color: #fff;
-      padding: 15px 30px;
-      border: none;
-      font-size: 18px;
-      cursor: pointer;
-      border-radius: 8px;
-      box-shadow:
-        0 0 20px #FF2E2E,
-        0 0 40px #FF2E2E;
-      transition:
-        transform 0.3s ease,
-        background 0.3s ease;
-    }
+nav a:hover{
+color:#ff2e2e;
+}
 
-    .hero button:hover {
-      transform: scale(1.1);
-      background: #007BFF;
-      box-shadow:
-        0 0 20px #007BFF,
-        0 0 40px #007BFF;
-    }
+nav a::after{
+content:'';
+position:absolute;
+bottom:-5px;
+right:0;
+width:0%;
+height:2px;
+background:#ff2e2e;
+transition:.3s;
+}
 
-    /* ================= SECTIONS ================= */
+nav a:hover::after{
+width:100%;
+}
 
-    section {
-      margin: 60px auto;
-      max-width: 800px;
-      text-align: center;
-      animation: fadeInUp 2s ease;
-      position: relative;
-      z-index: 1;
-    }
+/* ================= HERO ================= */
 
-    ul {
-      list-style: none;
-      padding: 0;
-    }
+.hero{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:120px 20px 40px;
+}
 
-    ul li {
-      margin: 10px 0;
-      background: rgba(28, 28, 28, 0.7);
-      padding: 10px;
-      border-radius: 6px;
-    }
+.hero-content{
+max-width:900px;
+animation:fadeUp 1.5s ease;
+}
 
-    /* ================= DASHBOARD ================= */
+.live-badge{
+display:inline-block;
+background:#ff2e2e;
+padding:8px 18px;
+border-radius:50px;
+font-weight:bold;
+margin-bottom:25px;
+box-shadow:0 0 20px #ff2e2e;
+animation:pulse 2s infinite;
+}
 
-    .dashboard {
-      background: rgba(28, 28, 28, 0.6);
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      border-radius: 15px;
-      margin-top: 40px;
-      box-shadow: 0 0 20px rgba(255, 46, 46, 0.5);
-    }
+.hero h2{
+font-size:65px;
+font-family:'Orbitron',sans-serif;
+margin-bottom:20px;
+text-shadow:
+0 0 15px #ff2e2e,
+0 0 35px #007bff;
+}
 
-    .progress-container {
-      background: #333;
-      border-radius: 8px;
-      overflow: hidden;
-      width: 300px;
-      height: 20px;
-      margin: 8px auto;
-    }
+.hero p{
+font-size:22px;
+color:#ddd;
+margin-bottom:35px;
+line-height:1.8;
+}
 
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      transition: width 0.5s;
-      background: #FF2E2E;
-    }
+.hero-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
 
-    /* ================= DISCORD ================= */
+.btn{
+padding:15px 32px;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+text-decoration:none;
+}
 
-    .discord-highlight a {
-      display: inline-block;
-      margin-top: 20px;
-      background: #007BFF;
-      color: #fff;
-      padding: 12px 25px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-      box-shadow: 0 0 15px #007BFF;
-    }
+.btn-live{
+background:#ff2e2e;
+color:white;
+box-shadow:0 0 20px #ff2e2e;
+}
 
-    .discord-highlight a:hover {
-      background: #FF2E2E;
-      transform: scale(1.1);
-      box-shadow: 0 0 15px #FF2E2E;
-    }
+.btn-live:hover{
+transform:translateY(-5px);
+background:#007bff;
+box-shadow:0 0 20px #007bff;
+}
 
-    /* ================= FOOTER ================= */
+.btn-discord{
+background:#5865F2;
+color:white;
+box-shadow:0 0 20px #5865F2;
+}
 
-    footer {
-      background: #121212;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
-      position: relative;
-      z-index: 1;
-    }
+.btn-discord:hover{
+transform:translateY(-5px);
+}
 
-    /* ================= ANIMATIONS ================= */
+/* ================= STATS ================= */
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+padding:60px 30px;
+max-width:1200px;
+margin:auto;
+}
 
-      to {
-        opacity: 1;
-      }
-    }
+.card{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+padding:30px;
+border-radius:20px;
+text-align:center;
+transition:.4s;
+}
 
-    @keyframes slideDown {
-      from {
-        transform: translateY(-50px);
-        opacity: 0;
-      }
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 25px rgba(255,46,46,.3);
+}
 
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
+.card h3{
+font-size:20px;
+margin-bottom:15px;
+color:#ff2e2e;
+}
 
-    @keyframes fadeInUp {
-      from {
-        transform: translateY(50px);
-        opacity: 0;
-      }
+.card p{
+font-size:28px;
+font-weight:bold;
+}
 
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-  </style>
+/* ================= ABOUT ================= */
+
+.about{
+padding:80px 25px;
+max-width:900px;
+margin:auto;
+text-align:center;
+}
+
+.about h2{
+font-size:40px;
+margin-bottom:25px;
+}
+
+.about p{
+font-size:20px;
+line-height:2;
+color:#ddd;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+margin-top:60px;
+padding:25px;
+text-align:center;
+background:rgba(0,0,0,.6);
+border-top:1px solid rgba(255,255,255,.08);
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.06);}
+100%{transform:scale(1);}
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:15px;
+}
+
+.hero h2{
+font-size:42px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+nav{
+justify-content:center;
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <!-- ================= VIDEO BACKGROUND ================= -->
+<!-- VIDEO -->
 
-  <div class="video-bg">
-    <video
-      id="bgVideo"
-      autoplay
-      muted
-      playsinline
-      preload="auto">
-    </video>
-  </div>
+<div class="video-bg">
+<video id="bgVideo" autoplay muted playsinline></video>
+</div>
 
-  <div class="video-overlay"></div>
+<div class="overlay"></div>
 
-  <canvas id="bgCanvas"></canvas>
+<!-- HEADER -->
 
-  <!-- ================= HEADER ================= -->
+<header>
 
-  <header>
+<div class="logo">
+<img src="logo.png">
+<h1>MACSEKY</h1>
+</div>
 
-    <img src="logo.png" alt="Macseky Logo" />
+<nav>
+<a href="#">الرئيسية</a>
+<a href="about.html">من أنا</a>
+<a href="videos.html">الفيديوهات</a>
+<a href="rules.html">القوانين</a>
+<a href="shop.html">المتجر</a>
+<a href="contact.html">تواصل</a>
+</nav>
 
-    <nav>
-      <a href="index.html">🏠 الرئيسية</a>
-      <a href="about.html">من أنا</a>
-      <a href="rules.html">قوانين البث</a>
-      <a href="videos.html">أحدث الفيديوهات</a>
-      <a href="support.html">الدعم المادي</a>
-      <a href="shop.html">المتجر</a>
-      <a href="contact.html">تواصل</a>
-    </nav>
+</header>
 
-  </header>
+<!-- HERO -->
 
-  <!-- ================= HERO ================= -->
+<section class="hero">
 
-  <section class="hero">
+<div class="hero-content">
 
-    <h1>
-      مرحباً بكم في بثي المباشر – Macseky
-    </h1>
+<div class="live-badge">
+🔴 LIVE STREAMER
+</div>
 
-    <button onclick="window.open('https://kick.com/macseky','_blank')">
-      شاهد البث الآن
-    </button>
+<h2>MACSEKY</h2>
 
-  </section>
+<p>
+Jordanian Streamer • Gamer • Boxer
+<br>
+بثوث يومية وأقوى لحظات الـ GTA RP والألعاب
+</p>
 
-  <!-- ================= ABOUT ================= -->
+<div class="hero-buttons">
 
-  <section class="about-snippet">
+<a class="btn btn-live"
+href="https://kick.com/macseky"
+target="_blank">
 
-    <h2>نبذة عني</h2>
+🎥 شاهد البث
 
-    <p>
-      أنا يزن (Macseky) من الأردن،
-      لاعب منتخب وطني للملاكمة،
-      وصانع محتوى وبث مباشر يومي
-      على منصة Kick.
-    </p>
+</a>
 
-  </section>
+<a class="btn btn-discord"
+href="https://discord.gg/c8v3VfYcJ"
+target="_blank">
 
-  <!-- ================= SCHEDULE ================= -->
+💬 Discord
 
-  <section class="schedule">
+</a>
 
-    <h2>جدول البث اليومي</h2>
+</div>
 
-    <p>
-      📅 البثوث يومية
-      الساعة 8 مساءً بتوقيت الأردن.
-    </p>
+</div>
 
-    <ul>
-      <li>🎮 GTA RP</li>
-      <li>🔥 ألعاب متنوعة</li>
-      <li>🥊 محتوى ملاكمة ورياضي</li>
-    </ul>
+</section>
 
-  </section>
+<!-- STATS -->
 
-  <!-- ================= DASHBOARD ================= -->
+<section class="stats">
 
-  <section class="dashboard">
+<div class="card">
+<h3>👥 المشاهدين</h3>
+<p id="viewers">127</p>
+</div>
 
-    <h2>📊 إحصائيات البث</h2>
+<div class="card">
+<h3>🎮 اللعبة الحالية</h3>
+<p id="game">GTA RP</p>
+</div>
 
-    <p>
-      👥 المشاهدين الآن:
-      <span id="viewers">غير متوفر</span>
-    </p>
+<div class="card">
+<h3>📡 الحالة</h3>
+<p id="status">LIVE</p>
+</div>
 
-    <div class="progress-container">
-      <div id="viewerBar" class="progress-bar"></div>
-    </div>
+<div class="card">
+<h3>⏰ وقت البث</h3>
+<p>8 PM</p>
+</div>
 
-    <p>
-      🎮 اللعبة الحالية:
-      <span id="game">غير متوفر</span>
-    </p>
+</section>
 
-    <p>
-      📡 حالة البث:
-      <span id="status">غير متوفر</span>
-    </p>
+<!-- ABOUT -->
 
-  </section>
+<section class="about">
 
-  <!-- ================= DISCORD ================= -->
+<h2>من أنا</h2>
 
-  <section class="discord-highlight">
+<p>
 
-    <h2>انضم إلى مجتمعنا</h2>
+أنا يزن المعروف باسم Macseky،
+صانع محتوى ولاعب ملاكمة من الأردن،
+أقدم بثوث يومية على Kick
+ومحتوى Gaming وGTA RP.
 
-    <a
-      href="https://discord.gg/c8v3VfYcJ"
-      target="_blank">
+</p>
 
-      💬 ادخل إلى Discord
+</section>
 
-    </a>
+<!-- FOOTER -->
 
-  </section>
+<footer>
+© 2026 MACSEKY — ALL RIGHTS RESERVED
+</footer>
 
-  <!-- ================= FOOTER ================= -->
+<script>
 
-  <footer>
-    © 2026 Macseky. جميع الحقوق محفوظة.
-  </footer>
+/* ================= VIDEOS ================= */
 
-  <!-- ================= JAVASCRIPT ================= -->
+const videos = [
+"videos/video3.mp4",
+"videos/video4.mp4",
+"videos/video5.mp4",
+"videos/video6.mp4"
+];
 
-  <script>
+const video = document.getElementById("bgVideo");
 
-    // ================= VIDEOS =================
+let currentVideo = 0;
 
-    const videos = [
-      "videos/video3.mp4",
-      "videos/video4.mp4",
-      "videos/video5.mp4",
-      "videos/video6.mp4",
-      "videos/video7.mp4",
-      "videos/video8.mp4"
-    ];
+function playVideo(index){
 
-    const video =
-      document.getElementById("bgVideo");
+video.src = videos[index];
 
-    let currentVideo = 0;
+video.play();
 
-    // ================= PLAY VIDEO =================
+}
 
-    function playVideo(index) {
+playVideo(currentVideo);
 
-      video.style.opacity = 0;
+/* تشغيل الفيديو التالي بعد انتهاء الحالي */
 
-      setTimeout(() => {
+video.addEventListener("ended",()=>{
 
-        video.src = videos[index];
+currentVideo++;
 
-        video.load();
+if(currentVideo >= videos.length){
+currentVideo = 0;
+}
 
-        video.play().catch(err => {
-          console.log("Video Error:", err);
-        });
+playVideo(currentVideo);
 
-        video.style.opacity = 1;
+});
 
-      }, 500);
-    }
+/* ================= FAKE LIVE STATS ================= */
 
-    // ================= START =================
+function randomStats(){
 
-    playVideo(currentVideo);
+const viewers =
+Math.floor(Math.random()*120)+50;
 
-    // ================= CHANGE VIDEO EVERY 30 SECONDS =================
+document.getElementById("viewers").innerText =
+viewers;
 
-    setInterval(() => {
+const games = [
+"GTA RP",
+"Phasmophobia",
+"Valorant",
+"FiveM"
+];
 
-      currentVideo++;
+const randomGame =
+games[Math.floor(Math.random()*games.length)];
 
-      // يرجع لأول فيديو بعد آخر فيديو
-      if (currentVideo >= videos.length) {
-        currentVideo = 0;
-      }
+document.getElementById("game").innerText =
+randomGame;
 
-      playVideo(currentVideo);
+}
 
-    }, 30000);
+setInterval(randomStats,7000);
 
-    // ================= DASHBOARD =================
-
-    async function loadStats() {
-
-      try {
-
-        const res =
-          await fetch("/status");
-
-        const data =
-          await res.json();
-
-        document.getElementById("viewers").innerText =
-          data.viewers || 0;
-
-        document.getElementById("game").innerText =
-          data.game || "None";
-
-        document.getElementById("status").innerText =
-          data.live
-            ? "🟢 مباشر"
-            : "🔴 أوفلاين";
-
-        const percent =
-          Math.min(data.viewers || 0, 100);
-
-        document.getElementById("viewerBar").style.width =
-          percent + "%";
-
-      } catch (err) {
-
-        console.log("Dashboard Error");
-
-      }
-    }
-
-    loadStats();
-
-    setInterval(loadStats, 10000);
-
-  </script>
+</script>
 
 </body>
 </html>
