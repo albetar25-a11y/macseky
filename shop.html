@@ -1,152 +1,389 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-  <meta charset="UTF-8">
-  <title>المتجر - Macseky</title>
-  <link rel="icon" type="image/png" href="logo.png">
-  <style>
-    body {
-      background:#0A0A0C;
-      color:#fff;
-      font-family:'Tajawal',sans-serif;
-      margin:0;
-      text-align:center;
-      overflow-x:hidden;
-    }
-    header {
-      background:#121212;
-      padding:15px;
-      text-align:center;
-      position:sticky;
-      top:0;
-      z-index:1000;
-      box-shadow:0 0 15px rgba(255,46,46,0.5);
-    }
-    header img {
-      height:70px;
-      transition:transform 0.6s ease, filter 0.6s ease;
-    }
-    header img:hover {
-      transform:scale(1.2) rotate(-5deg);
-      filter:drop-shadow(0 0 15px #FF2E2E);
-    }
-    nav a {
-      color:#fff;
-      margin:0 10px;
-      text-decoration:none;
-      font-weight:bold;
-      position:relative;
-      transition:color 0.3s ease;
-    }
-    nav a::after {
-      content:"";
-      position:absolute;
-      width:0%;
-      height:2px;
-      bottom:-5px;
-      left:0;
-      background:#FF2E2E;
-      transition:width 0.3s;
-    }
-    nav a:hover {
-      color:#FF2E2E;
-    }
-    nav a:hover::after {
-      width:100%;
-    }
-    h1 {
-      margin-top:40px;
-      font-size:42px;
-      color:#FF2E2E;
-      text-shadow:0 0 20px #FF2E2E, 0 0 40px #007BFF;
-      animation:slideDown 1.5s ease;
-      position:relative;
-      z-index:1;
-    }
-    p {
-      font-size:20px;
-      animation:fadeInUp 2s ease;
-      position:relative;
-      z-index:1;
-    }
-    footer {
-      background:#121212;
-      text-align:center;
-      padding:20px;
-      font-size:14px;
-      position:relative;
-      z-index:1;
-    }
-    @keyframes slideDown {from{transform:translateY(-50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
-    @keyframes fadeInUp {from{transform:translateY(50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
-    /* خلفية متحركة */
-    #bgCanvas {
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      z-index:0;
-      background:#0A0A0C;
-    }
-  </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>المتجر | Macseky</title>
+
+<link rel="icon" type="image/png" href="logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Tajawal',sans-serif;
+background:#050507;
+color:white;
+overflow-x:hidden;
+}
+
+/* ================= BACKGROUND ================= */
+
+#bgCanvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-2;
+background:#050507;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.9));
+z-index:-1;
+}
+
+/* ================= HEADER ================= */
+
+header{
+position:fixed;
+top:0;
+width:100%;
+padding:15px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(10,10,10,.55);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,.08);
+z-index:999;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo img{
+height:55px;
+transition:.3s;
+}
+
+.logo img:hover{
+transform:scale(1.1);
+filter:drop-shadow(0 0 15px #ff2e2e);
+}
+
+.logo h1{
+font-family:'Orbitron',sans-serif;
+font-size:24px;
+}
+
+nav{
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+position:relative;
+}
+
+nav a:hover{
+color:#ff2e2e;
+}
+
+nav a::after{
+content:'';
+position:absolute;
+bottom:-5px;
+right:0;
+width:0%;
+height:2px;
+background:#ff2e2e;
+transition:.3s;
+}
+
+nav a:hover::after{
+width:100%;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+padding-top:170px;
+text-align:center;
+padding-bottom:40px;
+}
+
+.hero h1{
+font-size:55px;
+font-family:'Orbitron',sans-serif;
+color:#ff2e2e;
+text-shadow:0 0 25px #ff2e2e, 0 0 50px #007bff;
+}
+
+.hero p{
+color:#ddd;
+margin-top:10px;
+font-size:18px;
+}
+
+/* ================= STORE GRID ================= */
+
+.store{
+max-width:1200px;
+margin:auto;
+padding:40px 20px 80px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
+
+.product{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+border-radius:18px;
+overflow:hidden;
+transition:.4s;
+text-align:center;
+}
+
+.product:hover{
+transform:translateY(-8px);
+box-shadow:0 0 25px rgba(255,46,46,.3);
+}
+
+.product img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.product h3{
+margin:15px 0 5px;
+font-size:20px;
+color:#ff2e2e;
+}
+
+.product p{
+color:#ddd;
+font-size:15px;
+padding:0 10px;
+}
+
+.price{
+font-size:18px;
+margin:10px 0;
+font-weight:bold;
+color:#00ffcc;
+}
+
+.buy{
+display:inline-block;
+margin:15px;
+padding:10px 20px;
+background:#ff2e2e;
+color:white;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+box-shadow:0 0 15px #ff2e2e;
+}
+
+.buy:hover{
+transform:scale(1.05);
+background:#007bff;
+box-shadow:0 0 15px #007bff;
+}
+
+/* ================= COMING SOON BANNER ================= */
+
+.banner{
+max-width:800px;
+margin:0 auto 30px;
+background:rgba(255,46,46,.1);
+border:1px solid rgba(255,46,46,.3);
+padding:15px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 0 20px rgba(255,46,46,.2);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+padding:25px;
+text-align:center;
+background:rgba(0,0,0,.6);
+border-top:1px solid rgba(255,255,255,.08);
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(40px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:38px;
+}
+
+nav{
+justify-content:center;
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
 
 <canvas id="bgCanvas"></canvas>
+<div class="overlay"></div>
+
+<!-- HEADER -->
 
 <header>
-  <img src="logo.png" alt="Macseky Logo">
-  <nav>
-    <a href="index.html">🏠 الرئيسية</a>
-    <a href="about.html">من أنا</a>
-    <a href="rules.html">قوانين البث</a>
-    <a href="videos.html">أحدث الفيديوهات</a>
-    <a href="support.html"> الدعم المادي</a>
-    <a href="shop.html">المتجر</a>
-    <a href="contact.html">تواصل</a>
-  </nav>
+
+<div class="logo">
+<img src="logo.png">
+<h1>MACSEKY</h1>
+</div>
+
+<nav>
+<a href="index.html">الرئيسية</a>
+<a href="about.html">من أنا</a>
+<a href="videos.html">الفيديوهات</a>
+<a href="rules.html">القوانين</a>
+<a href="shop.html">المتجر</a>
+<a href="contact.html">تواصل</a>
+</nav>
+
 </header>
 
-<h1>المتجر</h1>
-<p>🚀 يفتح قريباً – ترقبوا منتجات حصرية لعشاق Macseky!</p>
+<!-- HERO -->
+
+<section class="hero">
+
+<h1>متجر Macseky 🔥</h1>
+
+<p>منتجات حصرية لعشاق البث والـ Gaming</p>
+
+</section>
+
+<div class="banner">
+🚀 عروض و منتجات جديدة قريباً — لا تفوت الفرصة!
+</div>
+
+<!-- STORE -->
+
+<section class="store">
+
+<div class="product">
+<img src="https://i.imgur.com/0y0y0y0.jpg">
+<h3>Harka Headset</h3>
+<p>سماعات احترافية للبث والألعاب بجودة عالية</p>
+<div class="price">8 JD</div>
+<a class="buy" href="#">شراء</a>
+</div>
+
+<div class="product">
+<img src="https://i.imgur.com/0y0y0y0.jpg">
+<h3>Macseky Hoodie</h3>
+<p>هودي رسمي لعلامة Macseky</p>
+<div class="price">Coming Soon</div>
+<a class="buy" href="#">تفاصيل</a>
+</div>
+
+<div class="product">
+<img src="https://i.imgur.com/0y0y0y0.jpg">
+<h3>Gaming Mouse</h3>
+<p>ماوس احترافي للألعاب السريعة</p>
+<div class="price">Coming Soon</div>
+<a class="buy" href="#">تفاصيل</a>
+</div>
+
+</section>
+
+<!-- FOOTER -->
 
 <footer>
-  © 2026 Macseky. جميع الحقوق محفوظة.
+© 2026 MACSEKY — ALL RIGHTS RESERVED
 </footer>
 
 <script>
-const canvas = document.getElementById("bgCanvas");
-const ctx = canvas.getContext("2d");
+
+/* ================= PARTICLES ================= */
+
+const canvas =
+document.getElementById("bgCanvas");
+
+const ctx =
+canvas.getContext("2d");
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
-for (let i=0; i<100; i++) {
-  particles.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    r: Math.random()*2+1,
-    dx: (Math.random()-0.5)*0.5,
-    dy: (Math.random()-0.5)*0.5
-  });
+
+for(let i=0;i<70;i++){
+
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2+1,
+dx:(Math.random()-.5)*0.4,
+dy:(Math.random()-.5)*0.4
+});
+
 }
 
-function draw() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle = "#FF2E2E";
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
-    p.x += p.dx;
-    p.y += p.dy;
-    if(p.x<0||p.x>canvas.width) p.dx*=-1;
-    if(p.y<0||p.y>canvas.height) p.dy*=-1;
-  });
-  requestAnimationFrame(draw);
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#ff2e2e";
+
+particles.forEach(p=>{
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+
+p.x+=p.dx;
+p.y+=p.dy;
+
+if(p.x<0||p.x>canvas.width)p.dx*=-1;
+if(p.y<0||p.y>canvas.height)p.dy*=-1;
+
+});
+
+requestAnimationFrame(animate);
+
 }
-draw();
+
+animate();
+
 </script>
 
 </body>
