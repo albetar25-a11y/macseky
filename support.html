@@ -3,20 +3,51 @@
 
 <head>
 <meta charset="UTF-8">
-<title>الدعم المادي - Macseky</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الدعم المادي | Macseky</title>
+
 <link rel="icon" type="image/png" href="logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 
-body{
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
 font-family:'Tajawal',sans-serif;
 background:#050507;
 color:white;
 overflow-x:hidden;
 }
 
-/* ================= HEADER (مثل الرئيسية) ================= */
+/* BACKGROUND */
+
+#bgCanvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-2;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.9));
+z-index:-1;
+}
+
+/* HEADER */
 
 header{
 position:fixed;
@@ -28,8 +59,8 @@ justify-content:space-between;
 align-items:center;
 background:rgba(10,10,10,.55);
 backdrop-filter:blur(10px);
-z-index:999;
 border-bottom:1px solid rgba(255,255,255,.08);
+z-index:999;
 }
 
 .logo{
@@ -40,13 +71,20 @@ gap:12px;
 
 .logo img{
 height:55px;
+transition:.3s;
+}
+
+.logo img:hover{
+transform:scale(1.1);
+filter:drop-shadow(0 0 15px #ff2e2e);
 }
 
 .logo h1{
-font-size:26px;
-letter-spacing:2px;
 font-family:'Orbitron',sans-serif;
+font-size:24px;
 }
+
+/* NAV (SAME STYLE AS MAIN PAGE) */
 
 nav{
 display:flex;
@@ -81,34 +119,71 @@ nav a:hover::after{
 width:100%;
 }
 
-/* ================= CONTENT ================= */
+/* HERO */
 
-.container{
-padding-top:140px;
+.hero{
+padding-top:170px;
 text-align:center;
 }
 
-h1{
+.hero h1{
+font-size:55px;
+font-family:'Orbitron',sans-serif;
 color:#ff2e2e;
-font-size:42px;
+text-shadow:0 0 25px #ff2e2e;
 }
 
-p{
+.hero p{
+margin-top:15px;
 font-size:18px;
 color:#ddd;
 }
 
-/* ================= SUPPORT ================= */
+/* BUTTONS */
 
-.box{
+.support-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
 margin-top:40px;
+}
+
+.btn{
+padding:15px 30px;
+border-radius:12px;
+font-weight:bold;
+text-decoration:none;
+transition:.3s;
+box-shadow:0 0 15px rgba(255,46,46,.4);
+}
+
+.btn-paypal{
+background:#ff2e2e;
+color:white;
+}
+
+.btn-coffee{
+background:#007bff;
+color:white;
+}
+
+.btn:hover{
+transform:scale(1.08);
+}
+
+/* GOAL */
+
+.goal{
+text-align:center;
+margin-top:60px;
 }
 
 .bar{
 width:80%;
 height:25px;
 background:#222;
-margin:auto;
+margin:20px auto;
 border-radius:20px;
 overflow:hidden;
 }
@@ -119,40 +194,25 @@ width:100%;
 background:linear-gradient(90deg,#ff2e2e,#ff6f61);
 }
 
-.goal{
-margin-top:15px;
-color:#ccc;
-font-size:18px;
-}
-
-.btn{
-display:inline-block;
-margin-top:25px;
-padding:14px 30px;
-background:#ff2e2e;
-color:white;
-text-decoration:none;
-border-radius:10px;
-font-weight:bold;
-}
-
-.btn:hover{
-background:#007bff;
-}
+/* FOOTER */
 
 footer{
-margin-top:60px;
 padding:25px;
 text-align:center;
 background:rgba(0,0,0,.6);
+border-top:1px solid rgba(255,255,255,.08);
+margin-top:60px;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- HEADER -->
+<canvas id="bgCanvas"></canvas>
+<div class="overlay"></div>
+
 <header>
 
 <div class="logo">
@@ -165,42 +225,87 @@ background:rgba(0,0,0,.6);
 <a href="about.html">من أنا</a>
 <a href="videos.html">الفيديوهات</a>
 <a href="rules.html">القوانين</a>
+<a href="support.html">الدعم المادي</a>
 <a href="shop.html">المتجر</a>
-<a href="support.html" style="color:#ff2e2e;">الدعم المادي</a>
 <a href="contact.html">تواصل</a>
 </nav>
 
 </header>
 
-<!-- CONTENT -->
+<section class="hero">
 
-<div class="container">
+<h1>الدعم المادي 💰</h1>
+<p>دعمك يساعدني أكمل المحتوى وأطوره 🔥</p>
 
-<h1>الدعم المادي</h1>
+<div class="support-buttons">
 
-<p>دعمك يساعدنا نستمر ونطور المحتوى ❤️</p>
+<a class="btn btn-paypal" href="#">💳 PayPal</a>
+<a class="btn btn-coffee" href="#">☕ Support</a>
 
-<div class="box">
+</div>
+
+</section>
+
+<div class="goal">
+
+<h2>🎯 الهدف الشهري: 20$</h2>
 
 <div class="bar">
 <div class="fill"></div>
 </div>
 
-<div class="goal">
-💰 تم جمع: 20$ / 20$ (100%)
-</div>
-
-<a class="btn" href="https://streamlabs.com/maacseky/tip" target="_blank">
-ادعم الآن
-</a>
-
-</div>
+<p>تم الوصول إلى الهدف: 100%</p>
 
 </div>
 
 <footer>
 © 2026 MACSEKY — ALL RIGHTS RESERVED
 </footer>
+
+<script>
+
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<60;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2+1,
+dx:(Math.random()-.5)*0.4,
+dy:(Math.random()-.5)*0.4
+});
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#ff2e2e";
+
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+
+p.x+=p.dx;
+p.y+=p.dy;
+
+if(p.x<0||p.x>canvas.width)p.dx*=-1;
+if(p.y<0||p.y>canvas.height)p.dy*=-1;
+
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+
+</script>
 
 </body>
 </html>
