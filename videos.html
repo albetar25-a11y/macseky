@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>فيديوهات | Macseky</title>
+<title>أحدث الفيديوهات | Macseky</title>
 
 <link rel="icon" type="image/png" href="logo.png">
 
@@ -124,7 +124,7 @@ width:100%;
 .hero{
 padding-top:170px;
 text-align:center;
-padding-bottom:40px;
+padding-bottom:30px;
 }
 
 .hero h1{
@@ -139,7 +139,22 @@ color:#ddd;
 margin-top:10px;
 }
 
-/* ================= FILTER BUTTON ================= */
+/* ================= VIDEO ================= */
+
+.video-box{
+text-align:center;
+padding:20px;
+}
+
+iframe{
+width:80%;
+height:450px;
+border:none;
+border-radius:15px;
+box-shadow:0 0 25px rgba(255,46,46,.4);
+}
+
+/* ================= BUTTON ================= */
 
 .btn{
 display:inline-block;
@@ -155,44 +170,9 @@ box-shadow:0 0 20px #ff2e2e;
 }
 
 .btn:hover{
-transform:translateY(-5px);
 background:#007bff;
+transform:translateY(-5px);
 box-shadow:0 0 20px #007bff;
-}
-
-/* ================= VIDEO GRID ================= */
-
-.videos{
-max-width:1200px;
-margin:auto;
-padding:40px 20px 80px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
-}
-
-.video-card{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-border-radius:18px;
-overflow:hidden;
-transition:.4s;
-}
-
-.video-card:hover{
-transform:translateY(-8px);
-box-shadow:0 0 25px rgba(255,46,46,.3);
-}
-
-.video-card iframe{
-width:100%;
-height:200px;
-border:none;
-}
-
-.video-card h3{
-padding:15px;
-font-size:18px;
 }
 
 /* ================= FOOTER ================= */
@@ -202,27 +182,7 @@ padding:25px;
 text-align:center;
 background:rgba(0,0,0,.6);
 border-top:1px solid rgba(255,255,255,.08);
-}
-
-/* ================= ANIMATION ================= */
-
-@keyframes fadeUp{
-from{opacity:0; transform:translateY(40px);}
-to{opacity:1; transform:translateY(0);}
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:768px){
-
-.hero h1{
-font-size:38px;
-}
-
-nav{
-justify-content:center;
-}
-
+margin-top:50px;
 }
 
 </style>
@@ -258,42 +218,22 @@ justify-content:center;
 
 <section class="hero">
 
-<h1>فيديوهاتي 🔥</h1>
-<p>أفضل اللحظات، المقاطع، والبثوث السابقة</p>
-
-<a class="btn"
-href="https://www.youtube.com/@macseky"
-target="_blank">
-
-📺 قناة يوتيوب
-
-</a>
+<h1>أحدث فيديو 🔥</h1>
+<p>آخر Short نزلته على القناة</p>
 
 </section>
 
-<!-- VIDEOS -->
+<!-- VIDEO -->
 
-<section class="videos">
+<section class="video-box">
 
-<div class="video-card">
-<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
-<h3>🔥 Highlight #1</h3>
+<div id="latestShort">
+<p>جاري تحميل الفيديو...</p>
 </div>
 
-<div class="video-card">
-<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
-<h3>🎮 GTA RP Moments</h3>
-</div>
-
-<div class="video-card">
-<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
-<h3>🥊 Boxing Training</h3>
-</div>
-
-<div class="video-card">
-<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
-<h3>🔥 Best Stream Clips</h3>
-</div>
+<a class="btn" href="https://www.youtube.com/@macseky" target="_blank">
+📺 مشاهدة القناة
+</a>
 
 </section>
 
@@ -305,20 +245,74 @@ target="_blank">
 
 <script>
 
-/* ================= PARTICLES ================= */
+/* ================= SHORT FETCH ================= */
 
-const canvas =
-document.getElementById("bgCanvas");
+const channelId = "UCb9-8VgDZyQg7iT9hfI3jGQ";
 
-const ctx =
-canvas.getContext("2d");
+async function loadLatestShort() {
+
+try {
+
+const url = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+
+const res = await fetch(url);
+const text = await res.text();
+
+const parser = new DOMParser();
+const xml = parser.parseFromString(text, "text/xml");
+
+const entries = xml.querySelectorAll("entry");
+
+let videoId = null;
+
+for(let entry of entries){
+
+const title = entry.querySelector("title").textContent.toLowerCase();
+
+if(title.includes("shorts") || title.includes("#shorts")){
+
+videoId = entry.querySelector("videoId").textContent;
+break;
+
+}
+
+}
+
+if(!videoId && entries.length>0){
+videoId = entries[0].querySelector("videoId").textContent;
+}
+
+if(videoId){
+
+document.getElementById("latestShort").innerHTML = `
+<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
+`;
+
+}
+
+} catch(err){
+document.getElementById("latestShort").innerHTML = "فشل تحميل الفيديو";
+}
+
+}
+
+loadLatestShort();
+
+</script>
+
+<!-- PARTICLES -->
+
+<script>
+
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
 
-for(let i=0;i<70;i++){
+for(let i=0;i<60;i++){
 
 particles.push({
 x:Math.random()*canvas.width,
