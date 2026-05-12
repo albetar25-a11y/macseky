@@ -96,10 +96,40 @@
 <footer>© 2026 Macseky. جميع الحقوق محفوظة.</footer>
 
 <script>
-  // روابط الفيديوهات
+  // روابط الفيديوهات المحلية (من 3 إلى 8)
   const videos = [
-    "https://videotourl.com/videos/1778589545994-52b99f17-276c-4837-919f-9f2fcb6924e1.mp4",
-    "https://videotourl.com/videos/1778589686170-19cb8370-bd19-4f88-b9ba-ca16ebc8876e.mp4",
-    "https://videotourl.com/videos/1778589732572-5819d8c6-ac9e-4a18-adf5-1656db8df18e.mp4",
-    "https://videotourl.com/videos/1778589764966-90a1015f-8bf2-4d7b-9b93-30271a43986b.mp4",
-    "https://videotourl.com/videos/1778589789165-7a69ab1
+    "videos/video3.mp4",
+    "videos/video4.mp4",
+    "videos/video5.mp4",
+    "videos/video6.mp4",
+    "videos/video7.mp4",
+    "videos/video8.mp4"
+  ];
+
+  let currentIndex = 0;
+  const videoElement = document.getElementById("bgVideo");
+
+  function playVideo(index) {
+    videoElement.style.opacity = 0;
+    setTimeout(() => {
+      videoElement.src = videos[index];
+      videoElement.play();
+      videoElement.style.opacity = 1;
+    }, 1000);
+  }
+
+  // تشغيل أول فيديو
+  playVideo(currentIndex);
+
+  // تبديل الفيديو كل 25 ثانية
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % videos.length;
+    playVideo(currentIndex);
+  }, 25000);
+</script>
+
+<script>
+async function loadStats() {
+  try {
+    const res = await fetch("https://kick.com/api/v2/channels/macseky");
+    const data = await res
