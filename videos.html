@@ -2,7 +2,6 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,6 +13,7 @@
 
 <style>
 
+/* نفس ستايل الصفحة الرئيسية */
 *{
 margin:0;
 padding:0;
@@ -27,16 +27,14 @@ color:white;
 overflow-x:hidden;
 }
 
-/* BACKGROUND */
-
-#bgCanvas{
+/* BACKGROUND VIDEO STYLE */
+.video-bg{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
 z-index:-2;
-background:#050507;
 }
 
 .overlay{
@@ -45,7 +43,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.9));
+background:linear-gradient(to bottom, rgba(0,0,0,.7), rgba(0,0,0,.9));
 z-index:-1;
 }
 
@@ -61,8 +59,8 @@ justify-content:space-between;
 align-items:center;
 background:rgba(10,10,10,.55);
 backdrop-filter:blur(10px);
-border-bottom:1px solid rgba(255,255,255,.08);
 z-index:999;
+border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .logo{
@@ -73,12 +71,20 @@ gap:12px;
 
 .logo img{
 height:55px;
+transition:.4s;
+}
+
+.logo img:hover{
+transform:scale(1.1);
+filter:drop-shadow(0 0 15px #ff2e2e);
 }
 
 .logo h1{
 font-family:'Orbitron',sans-serif;
-font-size:24px;
+font-size:26px;
 }
+
+/* NAV */
 
 nav{
 display:flex;
@@ -90,63 +96,88 @@ nav a{
 color:white;
 text-decoration:none;
 font-weight:bold;
+position:relative;
+transition:.3s;
 }
 
 nav a:hover{
 color:#ff2e2e;
 }
 
+nav a::after{
+content:'';
+position:absolute;
+bottom:-5px;
+right:0;
+width:0%;
+height:2px;
+background:#ff2e2e;
+transition:.3s;
+}
+
+nav a:hover::after{
+width:100%;
+}
+
 /* HERO */
 
 .hero{
-padding-top:170px;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 text-align:center;
-padding-bottom:30px;
+padding:120px 20px 40px;
 }
 
-.hero h1{
+.hero-content{
+max-width:900px;
+}
+
+.hero h2{
 font-size:55px;
 font-family:'Orbitron',sans-serif;
-color:#ff2e2e;
-text-shadow:0 0 25px #ff2e2e;
+margin-bottom:20px;
+text-shadow:0 0 20px #ff2e2e;
 }
 
-/* VIDEO */
-
 .video-box{
-text-align:center;
-padding:20px;
+margin-top:30px;
 }
 
 iframe{
-width:80%;
+width:90%;
+max-width:900px;
 height:450px;
-border:none;
 border-radius:15px;
-box-shadow:0 0 25px rgba(255,46,46,.4);
+box-shadow:0 0 25px rgba(255,46,46,.3);
 }
-
-/* BUTTON */
 
 .btn{
 display:inline-block;
-margin-top:20px;
-padding:12px 25px;
+margin-top:25px;
+padding:14px 30px;
 background:#ff2e2e;
 color:white;
-border-radius:10px;
+border-radius:12px;
 text-decoration:none;
 font-weight:bold;
+box-shadow:0 0 15px #ff2e2e;
+transition:.3s;
 }
 
-/* FOOTER */
+.btn:hover{
+transform:scale(1.05);
+background:#007bff;
+box-shadow:0 0 15px #007bff;
+}
 
 footer{
+margin-top:50px;
 padding:25px;
 text-align:center;
 background:rgba(0,0,0,.6);
 border-top:1px solid rgba(255,255,255,.08);
-margin-top:50px;
 }
 
 </style>
@@ -155,10 +186,8 @@ margin-top:50px;
 
 <body>
 
-<canvas id="bgCanvas"></canvas>
+<div class="video-bg"></div>
 <div class="overlay"></div>
-
-<!-- HEADER -->
 
 <header>
 
@@ -179,29 +208,23 @@ margin-top:50px;
 
 </header>
 
-<!-- HERO -->
-
 <section class="hero">
 
-<h1>أحدث فيديو 🔥</h1>
+<div class="hero-content">
 
-</section>
+<h2>أحدث فيديو</h2>
 
-<!-- VIDEO -->
-
-<section class="video-box">
-
-<div id="videoContainer">
-<p>جاري تحميل الفيديو...</p>
+<div class="video-box">
+<iframe id="ytvideo" allowfullscreen></iframe>
 </div>
 
 <a class="btn" href="https://www.youtube.com/@macseky" target="_blank">
-📺 القناة
+شاهد القناة
 </a>
 
-</section>
+</div>
 
-<!-- FOOTER -->
+</section>
 
 <footer>
 © 2026 MACSEKY — ALL RIGHTS RESERVED
@@ -209,44 +232,27 @@ margin-top:50px;
 
 <script>
 
-/* ====== LAST VIDEO LOADER (100% RELIABLE) ====== */
+/*
+الحل الحقيقي: جلب آخر فيديو من القناة عبر RSS (بدون API key)
+*/
 
 const channelId = "UCb9-8VgDZyQg7iT9hfI3jGQ";
 
-async function loadVideo(){
+fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`)
+.then(res => res.text())
+.then(str => {
+const parser = new DOMParser();
+const xml = parser.parseFromString(str, "text/xml");
 
-try{
+const videoId = xml.querySelector("entry > videoId").textContent;
 
-const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`);
-const text = await res.text();
+document.getElementById("ytvideo").src =
+`https://www.youtube.com/embed/${videoId}`;
 
-const xml = new DOMParser().parseFromString(text,"text/xml");
-
-const entry = xml.querySelector("entry");
-
-if(!entry){
-document.getElementById("videoContainer").innerHTML = "لا يوجد فيديوهات";
-return;
-}
-
-const videoId = entry.querySelector("videoId").textContent;
-
-document.getElementById("videoContainer").innerHTML = `
-<iframe 
-src="https://www.youtube.com/embed/${videoId}"
-allowfullscreen>
-</iframe>
-`;
-
-}catch(e){
-
-document.getElementById("videoContainer").innerHTML = "فشل تحميل الفيديو";
-
-}
-
-}
-
-loadVideo();
+})
+.catch(err => {
+console.log("Error loading video", err);
+});
 
 </script>
 
