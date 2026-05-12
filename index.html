@@ -115,4 +115,7 @@
   function playVideo(index) {
     videoElement.style.opacity = 0;
     setTimeout(() => {
-      videoElement.src = videos
+      videoElement.src = videos[index];
+      videoElement.play();
+      videoElement.style.opacity = 1;
+    }, 1000);
