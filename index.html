@@ -27,7 +27,26 @@ color:white;
 overflow-x:hidden;
 }
 
-/* ================= BACKGROUND ================= */
+/* ================= BACKGROUND VIDEO (FIXED) ================= */
+
+.video-bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-3;
+overflow:hidden;
+}
+
+#bgVideo{
+width:100%;
+height:100%;
+object-fit:cover;
+filter:brightness(0.4);
+}
+
+/* ================= PARTICLES BG ================= */
 
 #bgCanvas{
 position:fixed;
@@ -54,9 +73,7 @@ border-bottom:1px solid rgba(255,255,255,.08);
 z-index:999;
 }
 
-header img{
-height:55px;
-}
+header img{height:55px;}
 
 nav{
 display:flex;
@@ -71,9 +88,7 @@ font-weight:bold;
 transition:.3s;
 }
 
-nav a:hover{
-color:#ff2e2e;
-}
+nav a:hover{color:#ff2e2e;}
 
 /* ================= HERO ================= */
 
@@ -160,10 +175,7 @@ border-radius:15px;
 box-shadow:0 0 20px rgba(255,46,46,.2);
 }
 
-.support h2{
-color:#ff2e2e;
-margin-bottom:15px;
-}
+.support h2{color:#ff2e2e;}
 
 .support a{
 display:inline-block;
@@ -176,36 +188,10 @@ color:white;
 transition:.3s;
 }
 
-.paypal{
-background:#0070ba;
-}
+.paypal{background:#0070ba;}
+.coffee{background:#ff2e2e;}
 
-.coffee{
-background:#ff2e2e;
-}
-
-.support a:hover{
-transform:scale(1.1);
-}
-
-/* زر صفحة الدعم */
-
-.support-page-btn{
-margin-top:15px;
-display:inline-block;
-background:#007bff;
-padding:12px 25px;
-border-radius:10px;
-color:white;
-text-decoration:none;
-font-weight:bold;
-box-shadow:0 0 15px #007bff;
-transition:.3s;
-}
-
-.support-page-btn:hover{
-transform:scale(1.1);
-}
+.support a:hover{transform:scale(1.1);}
 
 /* ================= FOOTER ================= */
 
@@ -223,9 +209,13 @@ text-align:center;
 
 <body>
 
-<canvas id="bgCanvas"></canvas>
+<!-- ================= BACKGROUND VIDEO FIX ================= -->
 
-<!-- HEADER -->
+<div class="video-bg">
+<video id="bgVideo" autoplay muted playsinline></video>
+</div>
+
+<canvas id="bgCanvas"></canvas>
 
 <header>
 
@@ -243,8 +233,6 @@ text-align:center;
 
 </header>
 
-<!-- HERO -->
-
 <section class="hero">
 
 <h1>MACSEKY LIVE 🔥</h1>
@@ -253,15 +241,7 @@ text-align:center;
 شاهد البث الآن
 </button>
 
-<br>
-
-<a class="support-page-btn" href="support.html">
-💖 ادعمني الآن
-</a>
-
 </section>
-
-<!-- DASHBOARD -->
 
 <section class="dashboard">
 
@@ -269,39 +249,21 @@ text-align:center;
 
 <p>👥 المشاهدين: <span id="viewers">0</span></p>
 
-<div class="bar">
-<div class="fill" id="bar"></div>
-</div>
+<div class="bar"><div class="fill" id="bar"></div></div>
 
 <p>🎮 اللعبة: <span id="game">...</span></p>
 <p>📡 الحالة: <span id="status">...</span></p>
 
 </section>
 
-<!-- VIDEO -->
-
-<section>
-
-<h2>🎥 آخر فيديو</h2>
-
-<div id="video">جاري التحميل...</div>
-
-</section>
-
-<!-- SUPPORT -->
-
 <section class="support">
 
-<h2>💖 دعم المحتوى</h2>
+<h2>💖 الدعم</h2>
 
-<p>دعمك يساعدني أطور المحتوى 🔥</p>
-
-<a class="paypal" href="https://streamlabs.com/maacseky/tip" target="_blank">PayPal</a>
-<a class="coffee" href="https://buymeacoffee.com/" target="_blank">Coffee</a>
+<a class="paypal" href="https://streamlabs.com/maacseky/tip">PayPal</a>
+<a class="coffee" href="https://buymeacoffee.com/">Coffee</a>
 
 </section>
-
-<!-- FOOTER -->
 
 <footer>
 © 2026 MACSEKY
@@ -309,56 +271,36 @@ text-align:center;
 
 <script>
 
-/* ================= STATS (Kick API) ================= */
+/* ================= BACKGROUND VIDEO FIX SCRIPT ================= */
 
-async function loadStats(){
+const videos = [
+"videos/video1.mp4",
+"videos/video2.mp4",
+"videos/video3.mp4"
+];
 
-try{
+const video = document.getElementById("bgVideo");
 
-const res = await fetch("https://kick.com/api/v1/channels/macseky");
-const data = await res.json();
+let index = 0;
 
-document.getElementById("viewers").innerText = data.viewers_count || 0;
-document.getElementById("game").innerText = data.livestream?.category?.name || "غير متوفر";
-document.getElementById("status").innerText = data.livestream ? "🟢 مباشر" : "🔴 أوفلاين";
+function playVideo(){
 
-let percent = Math.min(data.viewers_count || 0, 100);
-document.getElementById("bar").style.width = percent + "%";
+video.src = videos[index];
+video.load();
 
-}catch(e){
-console.log("stats error");
+video.play().catch(()=>{});
+
+index++;
+
+if(index >= videos.length){
+index = 0;
 }
 
 }
 
-loadStats();
-setInterval(loadStats,10000);
+playVideo();
 
-/* ================= YOUTUBE LAST VIDEO ================= */
-
-const channelId = "UCb9-8VgDZyQg7iT9hfI3jGQ";
-
-async function loadVideo(){
-
-try{
-
-const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`);
-const text = await res.text();
-
-const xml = new DOMParser().parseFromString(text,"text/xml");
-
-const id = xml.querySelector("entry videoId").textContent;
-
-document.getElementById("video").innerHTML =
-`<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>`;
-
-}catch(e){
-document.getElementById("video").innerHTML = "تعذر تحميل الفيديو";
-}
-
-}
-
-loadVideo();
+setInterval(playVideo,30000);
 
 /* ================= PARTICLES ================= */
 
