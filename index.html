@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Macseky</title>
+
   <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- تحسين دعم تشغيل الفيديو -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin:0;
@@ -12,93 +17,385 @@
       color:#fff;
       overflow-x:hidden;
     }
-    header {background:#121212; padding:15px; text-align:center; position:sticky; top:0; z-index:1000; box-shadow:0 0 15px rgba(255,46,46,0.5);}
-    header img {height:70px; transition:transform 0.6s ease, filter 0.6s ease;}
-    header img:hover {transform:scale(1.2) rotate(-5deg); filter:drop-shadow(0 0 15px #FF2E2E);}
-    nav a {color:#fff; margin:0 10px; text-decoration:none; font-weight:bold; position:relative; transition:color 0.3s ease;}
-    nav a::after {content:""; position:absolute; width:0%; height:2px; bottom:-5px; left:0; background:#FF2E2E; transition:width 0.3s;}
-    nav a:hover {color:#FF2E2E;}
-    nav a:hover::after {width:100%;}
-    .hero {text-align:center; padding:120px 20px; animation:fadeIn 2s ease; position:relative; z-index:1;}
-    .hero h1 {font-size:52px; margin-bottom:20px; text-shadow:0 0 25px #FF2E2E, 0 0 40px #007BFF; animation:slideDown 1.5s ease;}
-    .hero button {background:#FF2E2E; color:#fff; padding:15px 30px; border:none; font-size:18px; cursor:pointer; border-radius:8px; box-shadow:0 0 20px #FF2E2E, 0 0 40px #FF2E2E; transition:transform 0.3s ease, background 0.3s ease;}
-    .hero button:hover {transform:scale(1.1); background:#007BFF; box-shadow:0 0 20px #007BFF, 0 0 40px #007BFF;}
-    section {margin:60px auto; max-width:800px; text-align:center; animation:fadeInUp 2s ease; position:relative; z-index:1;}
-    ul {list-style:none; padding:0;}
-    ul li {margin:10px 0; background:rgba(28,28,28,0.7); padding:10px; border-radius:6px;}
-    .discord-highlight a {display:inline-block; margin-top:20px; background:#007BFF; color:#fff; padding:12px 25px; border-radius:6px; text-decoration:none; font-weight:bold; transition:0.3s; box-shadow:0 0 15px #007BFF;}
-    .discord-highlight a:hover {background:#FF2E2E; transform:scale(1.1); box-shadow:0 0 15px #FF2E2E;}
-    footer {background:#121212; text-align:center; padding:20px; font-size:14px; box-shadow:0 -5px 15px rgba(0,0,0,0.5); position:relative; z-index:1;}
-    @keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
-    @keyframes slideDown {from{transform:translateY(-50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
-    @keyframes fadeInUp {from{transform:translateY(50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
-    .dashboard {background:rgba(28,28,28,0.6); backdrop-filter:blur(10px); padding:20px; border-radius:15px; margin-top:40px; box-shadow:0 0 20px rgba(255,46,46,0.5);}
-    .progress-container {background:#333; border-radius:8px; overflow:hidden; width:300px; height:20px; margin:8px auto;}
-    .progress-bar {height:100%; width:0%; transition:width 0.5s;}
-    .video-bg {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-3; overflow:hidden;}
-    video {width:100%; height:100%; object-fit:cover; transition:opacity 1s ease-in-out;}
-    .video-overlay {position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:-2;}
-    #bgCanvas {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background:transparent;}
+
+    header {
+      background:#121212;
+      padding:15px;
+      text-align:center;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 0 15px rgba(255,46,46,0.5);
+    }
+
+    header img {
+      height:70px;
+      transition:transform 0.6s ease, filter 0.6s ease;
+    }
+
+    header img:hover {
+      transform:scale(1.2) rotate(-5deg);
+      filter:drop-shadow(0 0 15px #FF2E2E);
+    }
+
+    nav a {
+      color:#fff;
+      margin:0 10px;
+      text-decoration:none;
+      font-weight:bold;
+      position:relative;
+      transition:color 0.3s ease;
+    }
+
+    nav a::after {
+      content:"";
+      position:absolute;
+      width:0%;
+      height:2px;
+      bottom:-5px;
+      left:0;
+      background:#FF2E2E;
+      transition:width 0.3s;
+    }
+
+    nav a:hover {
+      color:#FF2E2E;
+    }
+
+    nav a:hover::after {
+      width:100%;
+    }
+
+    .hero {
+      text-align:center;
+      padding:120px 20px;
+      animation:fadeIn 2s ease;
+      position:relative;
+      z-index:2;
+    }
+
+    .hero h1 {
+      font-size:52px;
+      margin-bottom:20px;
+      text-shadow:0 0 25px #FF2E2E, 0 0 40px #007BFF;
+      animation:slideDown 1.5s ease;
+    }
+
+    .hero button {
+      background:#FF2E2E;
+      color:#fff;
+      padding:15px 30px;
+      border:none;
+      font-size:18px;
+      cursor:pointer;
+      border-radius:8px;
+      box-shadow:0 0 20px #FF2E2E, 0 0 40px #FF2E2E;
+      transition:transform 0.3s ease, background 0.3s ease;
+    }
+
+    .hero button:hover {
+      transform:scale(1.1);
+      background:#007BFF;
+      box-shadow:0 0 20px #007BFF, 0 0 40px #007BFF;
+    }
+
+    section {
+      margin:60px auto;
+      max-width:800px;
+      text-align:center;
+      animation:fadeInUp 2s ease;
+      position:relative;
+      z-index:2;
+    }
+
+    ul {
+      list-style:none;
+      padding:0;
+    }
+
+    ul li {
+      margin:10px 0;
+      background:rgba(28,28,28,0.7);
+      padding:10px;
+      border-radius:6px;
+    }
+
+    .discord-highlight a {
+      display:inline-block;
+      margin-top:20px;
+      background:#007BFF;
+      color:#fff;
+      padding:12px 25px;
+      border-radius:6px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
+      box-shadow:0 0 15px #007BFF;
+    }
+
+    .discord-highlight a:hover {
+      background:#FF2E2E;
+      transform:scale(1.1);
+      box-shadow:0 0 15px #FF2E2E;
+    }
+
+    footer {
+      background:#121212;
+      text-align:center;
+      padding:20px;
+      font-size:14px;
+      box-shadow:0 -5px 15px rgba(0,0,0,0.5);
+      position:relative;
+      z-index:2;
+    }
+
+    @keyframes fadeIn {
+      from { opacity:0; }
+      to { opacity:1; }
+    }
+
+    @keyframes slideDown {
+      from {
+        transform:translateY(-50px);
+        opacity:0;
+      }
+      to {
+        transform:translateY(0);
+        opacity:1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform:translateY(50px);
+        opacity:0;
+      }
+      to {
+        transform:translateY(0);
+        opacity:1;
+      }
+    }
+
+    .dashboard {
+      background:rgba(28,28,28,0.6);
+      backdrop-filter:blur(10px);
+      padding:20px;
+      border-radius:15px;
+      margin-top:40px;
+      box-shadow:0 0 20px rgba(255,46,46,0.5);
+    }
+
+    .progress-container {
+      background:#333;
+      border-radius:8px;
+      overflow:hidden;
+      width:300px;
+      height:20px;
+      margin:8px auto;
+    }
+
+    .progress-bar {
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,#FF2E2E,#007BFF);
+      transition:width 0.5s;
+    }
+
+    /* ================= VIDEO BACKGROUND ================= */
+
+    .video-bg {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:-3;
+      overflow:hidden;
+      background:#000;
+    }
+
+    #bgVideo {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:1;
+      transition:opacity 1s ease-in-out;
+    }
+
+    .video-overlay {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.55);
+      z-index:-2;
+    }
+
+    #bgCanvas {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:-1;
+      background:transparent;
+      pointer-events:none;
+    }
+
+    @media(max-width:768px) {
+
+      .hero h1 {
+        font-size:34px;
+      }
+
+      nav a {
+        display:inline-block;
+        margin:6px;
+      }
+
+      .progress-container {
+        width:90%;
+      }
+    }
   </style>
 </head>
+
 <body>
 
+<!-- ================= VIDEO BACKGROUND ================= -->
+
 <div class="video-bg">
-  <video id="bgVideo" autoplay muted playsinline></video>
+  <video
+    id="bgVideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto">
+  </video>
 </div>
+
 <div class="video-overlay"></div>
+
 <canvas id="bgCanvas"></canvas>
 
+<!-- ================= HEADER ================= -->
+
 <header>
+
   <img src="logo.png" alt="Macseky Logo">
+
   <nav>
     <a href="index.html">🏠 الرئيسية</a>
     <a href="about.html">من أنا</a>
     <a href="rules.html">قوانين البث</a>
     <a href="videos.html">أحدث الفيديوهات</a>
-    <a href="support.html"> الدعم المادي</a>
+    <a href="support.html">الدعم المادي</a>
     <a href="shop.html">المتجر</a>
     <a href="contact.html">تواصل</a>
   </nav>
+
 </header>
 
+<!-- ================= HERO ================= -->
+
 <section class="hero">
+
   <h1>مرحباً بكم في بثي المباشر – Macseky</h1>
-  <button onclick="window.open('https://kick.com/macseky','_blank')">شاهد البث الآن</button>
+
+  <button onclick="window.open('https://kick.com/macseky','_blank')">
+    شاهد البث الآن
+  </button>
+
 </section>
+
+<!-- ================= ABOUT ================= -->
 
 <section class="about-snippet">
+
   <h2>نبذة عني</h2>
-  <p>أنا يزن (Macseky) من الأردن، مواليد 2004، لاعب منتخب وطني للملاكمة منذ 2018، ومشارك في محافل دولية عديدة مع إنجازات على مستوى المملكة. بجانب الرياضة، أنا صانع محتوى وبث مباشر يومي، أشارك لحظاتي الحماسية معكم.</p>
+
+  <p>
+    أنا يزن (Macseky) من الأردن، مواليد 2004،
+    لاعب منتخب وطني للملاكمة منذ 2018،
+    ومشارك في محافل دولية عديدة مع إنجازات على مستوى المملكة.
+    بجانب الرياضة، أنا صانع محتوى وبث مباشر يومي،
+    أشارك لحظاتي الحماسية معكم.
+  </p>
+
 </section>
 
+<!-- ================= SCHEDULE ================= -->
+
 <section class="schedule">
+
   <h2>جدول البث اليومي</h2>
-  <p>📅 البثوث يومية على منصة Kick ابتداءً من الساعة 8 مساءً بتوقيت الأردن.</p>
+
+  <p>
+    📅 البثوث يومية على منصة Kick
+    ابتداءً من الساعة 8 مساءً بتوقيت الأردن.
+  </p>
+
   <ul>
     <li>🎮 قراند الحياة الواقعية (GTA RP)</li>
     <li>🔥 ألعاب متنوعة أخرى (FPS, قتال, مغامرات)</li>
     <li>🥊 محتوى خاص بالملاكمة والرياضة</li>
   </ul>
+
 </section>
+
+<!-- ================= DASHBOARD ================= -->
 
 <section class="dashboard">
+
   <h2>📊 إحصائيات البث</h2>
-  <p>👥 المشاهدين الآن: <span id="viewers">جارٍ التحميل...</span></p>
-  <div class="progress-container"><div id="viewerBar" class="progress-bar"></div></div>
-  <p>🎮 اللعبة الحالية: <span id="game">جارٍ التحميل...</span></p>
-  <p>📡 حالة البث: <span id="status">جارٍ التحميل...</span></p>
+
+  <p>
+    👥 المشاهدين الآن:
+    <span id="viewers">غير متوفر</span>
+  </p>
+
+  <div class="progress-container">
+    <div id="viewerBar" class="progress-bar"></div>
+  </div>
+
+  <p>
+    🎮 اللعبة الحالية:
+    <span id="game">غير متوفر</span>
+  </p>
+
+  <p>
+    📡 حالة البث:
+    <span id="status">غير متوفر</span>
+  </p>
+
 </section>
+
+<!-- ================= DISCORD ================= -->
 
 <section class="discord-highlight">
+
   <h2>انضم إلى مجتمعنا</h2>
-  <a href="https://discord.gg/c8v3VfYcJ" target="_blank">💬 ادخل إلى Discord</a>
+
+  <a href="https://discord.gg/c8v3VfYcJ" target="_blank">
+    💬 ادخل إلى Discord
+  </a>
+
 </section>
 
-<footer>© 2026 Macseky. جميع الحقوق محفوظة.</footer>
+<!-- ================= FOOTER ================= -->
+
+<footer>
+  © 2026 Macseky. جميع الحقوق محفوظة.
+</footer>
+
+<!-- ================= SCRIPTS ================= -->
 
 <script>
-  // روابط الفيديوهات المحلية (من 3 إلى 8)
+
+  // ================= VIDEOS =================
+
   const videos = [
     "videos/video3.mp4",
     "videos/video4.mp4",
@@ -109,22 +406,166 @@
   ];
 
   let currentIndex = 0;
-  const videoElement = document.getElementById("bgVideo");
+
+  const videoElement =
+    document.getElementById("bgVideo");
 
   function playVideo(index) {
+
     videoElement.style.opacity = 0;
+
     setTimeout(() => {
+
       videoElement.src = videos[index];
-      videoElement.play();
+
+      videoElement.load();
+
+      const playPromise =
+        videoElement.play();
+
+      if (playPromise !== undefined) {
+
+        playPromise.catch(error => {
+          console.log("Video autoplay blocked:", error);
+        });
+      }
+
       videoElement.style.opacity = 1;
-    }, 1000);
+
+    }, 500);
   }
 
   // تشغيل أول فيديو
   playVideo(currentIndex);
 
-  // تبديل الفيديو كل 25 ثانية
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % videos.length;
+  // تغيير الفيديو بعد انتهاءه
+  videoElement.addEventListener("ended", () => {
+
+    currentIndex++;
+
+    if (currentIndex >= videos.length) {
+      currentIndex = 0;
+    }
+
     playVideo(currentIndex);
-  }, 250
+  });
+
+  // ================= DASHBOARD =================
+
+  async function updateDashboard() {
+
+    try {
+
+      const response =
+        await fetch("/status");
+
+      const data =
+        await response.json();
+
+      document.getElementById("viewers").innerText =
+        data.viewers || "0";
+
+      document.getElementById("game").innerText =
+        data.game || "غير معروف";
+
+      document.getElementById("status").innerText =
+        data.live
+          ? "🔴 مباشر"
+          : "⚫ غير مباشر";
+
+      // البار
+      const bar =
+        document.getElementById("viewerBar");
+
+      let width =
+        Math.min(data.viewers, 100);
+
+      bar.style.width = width + "%";
+
+    } catch {
+
+      document.getElementById("status").innerText =
+        "❌ تعذر الاتصال";
+    }
+  }
+
+  // تحديث كل 5 ثواني
+  setInterval(updateDashboard, 5000);
+
+  updateDashboard();
+
+  // ================= PARTICLES =================
+
+  const canvas =
+    document.getElementById("bgCanvas");
+
+  const ctx =
+    canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particles = [];
+
+  for (let i = 0; i < 80; i++) {
+
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 3,
+      speedY: Math.random() * 1 + 0.2
+    });
+  }
+
+  function animateParticles() {
+
+    ctx.clearRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    particles.forEach(p => {
+
+      ctx.beginPath();
+
+      ctx.arc(
+        p.x,
+        p.y,
+        p.size,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fillStyle =
+        "rgba(255,255,255,0.4)";
+
+      ctx.fill();
+
+      p.y += p.speedY;
+
+      if (p.y > canvas.height) {
+        p.y = 0;
+      }
+    });
+
+    requestAnimationFrame(
+      animateParticles
+    );
+  }
+
+  animateParticles();
+
+  // ================= RESIZE =================
+
+  window.addEventListener("resize", () => {
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+</script>
+
+</body>
+</html>
