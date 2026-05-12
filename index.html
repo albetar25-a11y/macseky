@@ -2,19 +2,17 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Macseky - الرئيسية</title>
-
 <link rel="icon" type="image/png" href="logo.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* ================= RESET ================= */
+/* ================= BASE ================= */
 
 *{
 margin:0;
@@ -46,11 +44,11 @@ header{
 position:fixed;
 top:0;
 width:100%;
-padding:15px 30px;
+padding:15px 25px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:rgba(10,10,10,.55);
+background:rgba(10,10,10,.6);
 backdrop-filter:blur(10px);
 border-bottom:1px solid rgba(255,255,255,.08);
 z-index:999;
@@ -58,17 +56,11 @@ z-index:999;
 
 header img{
 height:55px;
-transition:.3s;
-}
-
-header img:hover{
-transform:scale(1.1);
-filter:drop-shadow(0 0 15px #ff2e2e);
 }
 
 nav{
 display:flex;
-gap:18px;
+gap:15px;
 flex-wrap:wrap;
 }
 
@@ -88,7 +80,7 @@ color:#ff2e2e;
 .hero{
 padding-top:180px;
 text-align:center;
-padding-bottom:60px;
+padding-bottom:40px;
 }
 
 .hero h1{
@@ -100,12 +92,12 @@ text-shadow:0 0 25px #ff2e2e;
 
 .hero button{
 margin-top:20px;
-padding:15px 30px;
+padding:14px 28px;
 border:none;
 border-radius:10px;
 background:#ff2e2e;
 color:white;
-font-size:18px;
+font-size:16px;
 cursor:pointer;
 transition:.3s;
 box-shadow:0 0 20px #ff2e2e;
@@ -120,7 +112,7 @@ background:#007bff;
 
 section{
 text-align:center;
-margin:50px auto;
+margin:40px auto;
 max-width:900px;
 }
 
@@ -133,79 +125,96 @@ border-radius:15px;
 box-shadow:0 0 20px rgba(255,46,46,.2);
 }
 
-.progress-container{
+.bar{
 width:80%;
-height:20px;
+height:18px;
 background:#222;
 margin:10px auto;
 border-radius:10px;
 overflow:hidden;
 }
 
-.progress-bar{
+.fill{
 height:100%;
 width:0%;
 background:#ff2e2e;
 transition:.5s;
 }
 
+/* ================= VIDEO ================= */
+
+iframe{
+width:85%;
+height:420px;
+border:none;
+border-radius:15px;
+box-shadow:0 0 20px rgba(255,46,46,.3);
+}
+
 /* ================= SUPPORT ================= */
 
 .support{
 background:rgba(255,255,255,.05);
-padding:30px;
+padding:25px;
 border-radius:15px;
-margin-top:50px;
 box-shadow:0 0 20px rgba(255,46,46,.2);
 }
 
 .support h2{
 color:#ff2e2e;
-margin-bottom:20px;
+margin-bottom:15px;
 }
 
 .support a{
 display:inline-block;
 margin:10px;
-padding:12px 25px;
+padding:12px 22px;
 border-radius:10px;
 text-decoration:none;
 font-weight:bold;
+color:white;
 transition:.3s;
 }
 
 .paypal{
 background:#0070ba;
-color:white;
 }
 
 .coffee{
 background:#ff2e2e;
-color:white;
 }
 
 .support a:hover{
 transform:scale(1.1);
 }
 
-/* ================= VIDEO ================= */
+/* زر صفحة الدعم */
 
-iframe{
-width:80%;
-height:450px;
-border:none;
-border-radius:15px;
-box-shadow:0 0 20px rgba(255,46,46,.3);
+.support-page-btn{
+margin-top:15px;
+display:inline-block;
+background:#007bff;
+padding:12px 25px;
+border-radius:10px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 0 15px #007bff;
+transition:.3s;
+}
+
+.support-page-btn:hover{
+transform:scale(1.1);
 }
 
 /* ================= FOOTER ================= */
 
 footer{
-margin-top:60px;
-padding:25px;
-text-align:center;
+margin-top:50px;
+padding:20px;
 background:rgba(0,0,0,.6);
 border-top:1px solid rgba(255,255,255,.08);
+text-align:center;
 }
 
 </style>
@@ -225,8 +234,8 @@ border-top:1px solid rgba(255,255,255,.08);
 <nav>
 <a href="index.html">🏠 الرئيسية</a>
 <a href="about.html">من أنا</a>
-<a href="rules.html">قوانين</a>
-<a href="videos.html">فيديوهات</a>
+<a href="rules.html">القوانين</a>
+<a href="videos.html">الفيديوهات</a>
 <a href="support.html">💖 الدعم</a>
 <a href="shop.html">المتجر</a>
 <a href="contact.html">تواصل</a>
@@ -244,18 +253,24 @@ border-top:1px solid rgba(255,255,255,.08);
 شاهد البث الآن
 </button>
 
+<br>
+
+<a class="support-page-btn" href="support.html">
+💖 ادعمني الآن
+</a>
+
 </section>
 
 <!-- DASHBOARD -->
 
 <section class="dashboard">
 
-<h2>📊 إحصائيات البث</h2>
+<h2>📊 الإحصائيات</h2>
 
 <p>👥 المشاهدين: <span id="viewers">0</span></p>
 
-<div class="progress-container">
-<div class="progress-bar" id="bar"></div>
+<div class="bar">
+<div class="fill" id="bar"></div>
 </div>
 
 <p>🎮 اللعبة: <span id="game">...</span></p>
@@ -269,9 +284,7 @@ border-top:1px solid rgba(255,255,255,.08);
 
 <h2>🎥 آخر فيديو</h2>
 
-<div id="video">
-<p>جاري التحميل...</p>
-</div>
+<div id="video">جاري التحميل...</div>
 
 </section>
 
@@ -279,29 +292,24 @@ border-top:1px solid rgba(255,255,255,.08);
 
 <section class="support">
 
-<h2>💖 دعم البث</h2>
+<h2>💖 دعم المحتوى</h2>
 
-<p>دعمك يساعدني أستمر وأطور المحتوى 🔥</p>
+<p>دعمك يساعدني أطور المحتوى 🔥</p>
 
-<a class="paypal" href="https://streamlabs.com/maacseky/tip" target="_blank">
-💳 PayPal
-</a>
-
-<a class="coffee" href="https://buymeacoffee.com/" target="_blank">
-☕ Buy Me a Coffee
-</a>
+<a class="paypal" href="https://streamlabs.com/maacseky/tip" target="_blank">PayPal</a>
+<a class="coffee" href="https://buymeacoffee.com/" target="_blank">Coffee</a>
 
 </section>
 
 <!-- FOOTER -->
 
 <footer>
-© 2026 MACSEKY — ALL RIGHTS RESERVED
+© 2026 MACSEKY
 </footer>
 
 <script>
 
-/* ================= STATS ================= */
+/* ================= STATS (Kick API) ================= */
 
 async function loadStats(){
 
@@ -318,7 +326,7 @@ let percent = Math.min(data.viewers_count || 0, 100);
 document.getElementById("bar").style.width = percent + "%";
 
 }catch(e){
-console.log("error stats");
+console.log("stats error");
 }
 
 }
@@ -332,6 +340,8 @@ const channelId = "UCb9-8VgDZyQg7iT9hfI3jGQ";
 
 async function loadVideo(){
 
+try{
+
 const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`);
 const text = await res.text();
 
@@ -339,9 +349,12 @@ const xml = new DOMParser().parseFromString(text,"text/xml");
 
 const id = xml.querySelector("entry videoId").textContent;
 
-document.getElementById("video").innerHTML = `
-<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>
-`;
+document.getElementById("video").innerHTML =
+`<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>`;
+
+}catch(e){
+document.getElementById("video").innerHTML = "تعذر تحميل الفيديو";
+}
 
 }
 
@@ -374,7 +387,6 @@ ctx.clearRect(0,0,canvas.width,canvas.height);
 ctx.fillStyle="#ff2e2e";
 
 particles.forEach(p=>{
-
 ctx.beginPath();
 ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
 ctx.fill();
