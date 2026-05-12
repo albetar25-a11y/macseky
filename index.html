@@ -44,8 +44,7 @@
 <body>
 
 <div class="video-bg">
-  <!-- الصوت شغال (muted محذوف) -->
-  <video id="bgVideo" autoplay playsinline></video>
+  <video id="bgVideo" autoplay muted playsinline></video>
 </div>
 <div class="video-overlay"></div>
 <canvas id="bgCanvas"></canvas>
@@ -116,4 +115,16 @@
     videoElement.style.opacity = 0;
     setTimeout(() => {
       videoElement.src = videos[index];
-      video
+      videoElement.play();
+      videoElement.style.opacity = 1;
+    }, 1000);
+  }
+
+  // تشغيل أول فيديو
+  playVideo(currentIndex);
+
+  // تبديل الفيديو كل 25 ثانية
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % videos.length;
+    playVideo(currentIndex);
+  }, 250
