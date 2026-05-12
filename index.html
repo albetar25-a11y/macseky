@@ -44,6 +44,7 @@
 <body>
 
 <div class="video-bg">
+  <!-- يبدأ Muted عشان autoplay يشتغل -->
   <video id="bgVideo" autoplay muted playsinline></video>
 </div>
 <div class="video-overlay"></div>
@@ -114,17 +115,4 @@
   function playVideo(index) {
     videoElement.style.opacity = 0;
     setTimeout(() => {
-      videoElement.src = videos[index];
-      videoElement.play();
-      videoElement.style.opacity = 1;
-    }, 1000);
-  }
-
-  // تشغيل أول فيديو
-  playVideo(currentIndex);
-
-  // تبديل الفيديو كل 25 ثانية
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % videos.length;
-    playVideo(currentIndex);
-  }, 250
+      videoElement.src = videos
