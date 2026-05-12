@@ -1,205 +1,297 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-  <meta charset="UTF-8">
-  <title>تواصل - Macseky</title>
-  <link rel="icon" type="image/png" href="logo.png">
-  <style>
-    body {
-      background:#0A0A0C;
-      color:#fff;
-      font-family:'Tajawal',sans-serif;
-      margin:0;
-      text-align:center;
-      overflow-x:hidden;
-    }
-    header {
-      background:#121212;
-      padding:15px;
-      text-align:center;
-      position:sticky;
-      top:0;
-      z-index:1000;
-      box-shadow:0 0 15px rgba(255,46,46,0.5);
-    }
-    header img {
-      height:70px;
-      transition:transform 0.6s ease, filter 0.6s ease;
-    }
-    header img:hover {
-      transform:scale(1.2) rotate(-5deg);
-      filter:drop-shadow(0 0 15px #FF2E2E);
-    }
-    nav a {
-      color:#fff;
-      margin:0 10px;
-      text-decoration:none;
-      font-weight:bold;
-      position:relative;
-      transition:color 0.3s ease;
-    }
-    nav a::after {
-      content:"";
-      position:absolute;
-      width:0%;
-      height:2px;
-      bottom:-5px;
-      left:0;
-      background:#FF2E2E;
-      transition:width 0.3s;
-    }
-    nav a:hover {
-      color:#FF2E2E;
-    }
-    nav a:hover::after {
-      width:100%;
-    }
-    h1 {
-      margin-top:40px;
-      font-size:42px;
-      color:#007BFF;
-      text-shadow:0 0 20px #FF2E2E, 0 0 40px #007BFF;
-      animation:slideDown 1.5s ease;
-      position:relative;
-      z-index:1;
-    }
-    .contact-info {
-      margin:30px 0;
-      animation:fadeInUp 2s ease;
-      position:relative;
-      z-index:1;
-    }
-    .contact-info a {
-      display:inline-block;
-      margin-top:10px;
-      background:#007BFF;
-      color:#fff;
-      padding:12px 25px;
-      border-radius:6px;
-      text-decoration:none;
-      font-weight:bold;
-      transition:0.3s;
-      box-shadow:0 0 15px #007BFF;
-    }
-    .contact-info a:hover {
-      background:#FF2E2E;
-      transform:scale(1.1);
-      box-shadow:0 0 15px #FF2E2E;
-    }
-    .social {
-      margin:40px 0;
-      animation:fadeIn 2s ease;
-      position:relative;
-      z-index:1;
-    }
-    .social a {
-      display:inline-block;
-      margin:10px;
-      background:rgba(28,28,28,0.7);
-      padding:12px 20px;
-      border-radius:8px;
-      color:#fff;
-      text-decoration:none;
-      font-weight:bold;
-      transition:0.3s;
-      box-shadow:0 0 10px rgba(0,123,255,0.5);
-    }
-    .social a:hover {
-      background:#FF2E2E;
-      transform:scale(1.1);
-      box-shadow:0 0 15px #FF2E2E;
-    }
-    footer {
-      background:#121212;
-      text-align:center;
-      padding:20px;
-      font-size:14px;
-      position:relative;
-      z-index:1;
-    }
-    @keyframes slideDown {from{transform:translateY(-50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
-    @keyframes fadeInUp {from{transform:translateY(50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
-    @keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
-    /* خلفية متحركة */
-    #bgCanvas {
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      z-index:0;
-      background:#0A0A0C;
-    }
-  </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تواصل | Macseky</title>
+
+<link rel="icon" type="image/png" href="logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Tajawal',sans-serif;
+background:#050507;
+color:white;
+overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+#bgCanvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-2;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom, rgba(0,0,0,.6), rgba(0,0,0,.9));
+z-index:-1;
+}
+
+/* HEADER */
+
+header{
+position:fixed;
+top:0;
+width:100%;
+padding:15px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(10,10,10,.55);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,.08);
+z-index:999;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo img{
+height:55px;
+transition:.3s;
+}
+
+.logo img:hover{
+transform:scale(1.1);
+filter:drop-shadow(0 0 15px #ff2e2e);
+}
+
+.logo h1{
+font-family:'Orbitron',sans-serif;
+font-size:24px;
+}
+
+/* HERO */
+
+.hero{
+padding-top:170px;
+text-align:center;
+padding-bottom:20px;
+}
+
+.hero h1{
+font-size:55px;
+font-family:'Orbitron',sans-serif;
+color:#ff2e2e;
+text-shadow:0 0 25px #ff2e2e;
+}
+
+/* DISCORD CARD */
+
+.card{
+max-width:700px;
+margin:30px auto;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+border-radius:20px;
+padding:30px;
+text-align:center;
+box-shadow:0 0 25px rgba(255,46,46,.2);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h2{
+color:#ff2e2e;
+margin-bottom:15px;
+}
+
+.btn{
+display:inline-block;
+margin-top:15px;
+padding:12px 25px;
+background:#5865F2;
+color:white;
+border-radius:12px;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 0 20px #5865F2;
+transition:.3s;
+}
+
+.btn:hover{
+background:#ff2e2e;
+box-shadow:0 0 20px #ff2e2e;
+transform:scale(1.05);
+}
+
+/* SOCIAL GRID */
+
+.social{
+max-width:900px;
+margin:40px auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.social a{
+display:block;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+padding:20px;
+border-radius:15px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+text-align:center;
+transition:.3s;
+box-shadow:0 0 10px rgba(0,0,0,.3);
+}
+
+.social a:hover{
+background:#ff2e2e;
+transform:translateY(-6px);
+box-shadow:0 0 25px rgba(255,46,46,.3);
+}
+
+/* FOOTER */
+
+footer{
+padding:25px;
+text-align:center;
+background:rgba(0,0,0,.6);
+border-top:1px solid rgba(255,255,255,.08);
+margin-top:60px;
+}
+
+</style>
+
 </head>
+
 <body>
 
 <canvas id="bgCanvas"></canvas>
+<div class="overlay"></div>
+
+<!-- HEADER -->
 
 <header>
-  <img src="logo.png" alt="Macseky Logo">
-  <nav>
-    <a href="index.html">🏠 الرئيسية</a>
-    <a href="about.html">من أنا</a>
-    <a href="rules.html">قوانين البث</a>
-    <a href="videos.html">أحدث الفيديوهات</a>
-    <a href="support.html"> الدعم المادي</a>
-    <a href="shop.html">المتجر</a>
-    <a href="contact.html">تواصل</a>
-  </nav>
+
+<div class="logo">
+<img src="logo.png">
+<h1>MACSEKY</h1>
+</div>
+
 </header>
 
-<h1>تواصل معي</h1>
+<!-- HERO -->
 
-<div class="contact-info">
-  <p>💬 للتواصل المباشر عبر الديسكورد:</p>
-  <a href="https://discord.gg/c8v3VfYcJ" target="_blank">انضم إلى Discord</a>
+<section class="hero">
+
+<h1>تواصل معي 💬</h1>
+
+</section>
+
+<!-- DISCORD -->
+
+<div class="card">
+
+<h2>🚀 أسرع طريقة للتواصل</h2>
+
+<p>انضم إلى مجتمع Discord الخاص بي للتواصل المباشر</p>
+
+<a class="btn" href="https://discord.gg/c8v3VfYcJ" target="_blank">
+💬 دخول Discord
+</a>
+
 </div>
 
-<div class="social">
-  <h2>منصاتي الرسمية</h2>
-  <a href="https://kick.com/macseky" target="_blank">🎮 Kick</a>
-  <a href="https://www.instagram.com/macseky" target="_blank">📸 Instagram</a>
-  <a href="https://www.youtube.com/channel/UCb9-8VgDZyQg7iT9hfI3jGQ" target="_blank">▶️ YouTube</a>
-  <a href="https://discord.gg/c8v3VfYcJ" target="_blank">💬 Discord</a>
-</div>
+<!-- SOCIAL -->
+
+<section class="social">
+
+<a href="https://kick.com/macseky" target="_blank">🎮 Kick</a>
+<a href="https://www.instagram.com/macseky" target="_blank">📸 Instagram</a>
+<a href="https://www.youtube.com/@macseky" target="_blank">▶️ YouTube</a>
+<a href="https://discord.gg/c8v3VfYcJ" target="_blank">💬 Discord</a>
+
+</section>
+
+<!-- FOOTER -->
 
 <footer>
-  © 2026 Macseky. جميع الحقوق محفوظة.
+© 2026 MACSEKY — ALL RIGHTS RESERVED
 </footer>
 
 <script>
+
+/* PARTICLES */
+
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
-for (let i=0; i<100; i++) {
-  particles.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    r: Math.random()*2+1,
-    dx: (Math.random()-0.5)*0.5,
-    dy: (Math.random()-0.5)*0.5
-  });
+
+for(let i=0;i<60;i++){
+
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2+1,
+dx:(Math.random()-.5)*0.4,
+dy:(Math.random()-.5)*0.4
+});
+
 }
 
-function draw() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle = "#FF2E2E";
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
-    p.x += p.dx;
-    p.y += p.dy;
-    if(p.x<0||p.x>canvas.width) p.dx*=-1;
-    if(p.y<0||p.y>canvas.height) p.dy*=-1;
-  });
-  requestAnimationFrame(draw);
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#ff2e2e";
+
+particles.forEach(p=>{
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+
+p.x+=p.dx;
+p.y+=p.dy;
+
+if(p.x<0||p.x>canvas.width)p.dx*=-1;
+if(p.y<0||p.y>canvas.height)p.dy*=-1;
+
+});
+
+requestAnimationFrame(animate);
+
 }
-draw();
+
+animate();
+
 </script>
 
 </body>
