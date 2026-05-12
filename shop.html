@@ -124,7 +124,7 @@ width:100%;
 .hero{
 padding-top:170px;
 text-align:center;
-padding-bottom:40px;
+padding-bottom:30px;
 }
 
 .hero h1{
@@ -140,86 +140,43 @@ margin-top:10px;
 font-size:18px;
 }
 
-/* ================= STORE GRID ================= */
+/* ================= COMING SOON ================= */
 
-.store{
-max-width:1200px;
-margin:auto;
-padding:40px 20px 80px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-}
-
-.product{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-border-radius:18px;
-overflow:hidden;
-transition:.4s;
+.coming{
+max-width:800px;
+margin:60px auto;
 text-align:center;
+padding:40px 20px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.1);
+border-radius:20px;
+box-shadow:0 0 25px rgba(255,46,46,.2);
+animation:fadeUp 1.5s ease;
 }
 
-.product:hover{
-transform:translateY(-8px);
-box-shadow:0 0 25px rgba(255,46,46,.3);
-}
-
-.product img{
-width:100%;
-height:180px;
-object-fit:cover;
-}
-
-.product h3{
-margin:15px 0 5px;
-font-size:20px;
+.coming h2{
+font-size:32px;
 color:#ff2e2e;
+margin-bottom:15px;
+text-shadow:0 0 20px #ff2e2e;
 }
 
-.product p{
-color:#ddd;
-font-size:15px;
-padding:0 10px;
-}
-
-.price{
+.coming p{
 font-size:18px;
-margin:10px 0;
-font-weight:bold;
-color:#00ffcc;
+color:#ddd;
+line-height:1.8;
 }
 
-.buy{
+/* ================= BADGE ================= */
+
+.badge{
 display:inline-block;
-margin:15px;
+margin-top:20px;
 padding:10px 20px;
 background:#ff2e2e;
-color:white;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-transition:.3s;
-box-shadow:0 0 15px #ff2e2e;
-}
-
-.buy:hover{
-transform:scale(1.05);
-background:#007bff;
-box-shadow:0 0 15px #007bff;
-}
-
-/* ================= COMING SOON BANNER ================= */
-
-.banner{
-max-width:800px;
-margin:0 auto 30px;
-background:rgba(255,46,46,.1);
-border:1px solid rgba(255,46,46,.3);
-padding:15px;
 border-radius:12px;
-text-align:center;
-box-shadow:0 0 20px rgba(255,46,46,.2);
+font-weight:bold;
+box-shadow:0 0 20px #ff2e2e;
 }
 
 /* ================= FOOTER ================= */
@@ -229,6 +186,7 @@ padding:25px;
 text-align:center;
 background:rgba(0,0,0,.6);
 border-top:1px solid rgba(255,255,255,.08);
+margin-top:80px;
 }
 
 /* ================= ANIMATION ================= */
@@ -236,20 +194,6 @@ border-top:1px solid rgba(255,255,255,.08);
 @keyframes fadeUp{
 from{opacity:0;transform:translateY(40px);}
 to{opacity:1;transform:translateY(0);}
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:768px){
-
-.hero h1{
-font-size:38px;
-}
-
-nav{
-justify-content:center;
-}
-
 }
 
 </style>
@@ -285,42 +229,25 @@ justify-content:center;
 
 <section class="hero">
 
-<h1>متجر Macseky 🔥</h1>
-
-<p>منتجات حصرية لعشاق البث والـ Gaming</p>
+<h1>المتجر 🛒</h1>
+<p>منتجات رسمية قادمة لعشاق Macseky</p>
 
 </section>
 
-<div class="banner">
-🚀 عروض و منتجات جديدة قريباً — لا تفوت الفرصة!
-</div>
+<!-- COMING SOON -->
 
-<!-- STORE -->
+<section class="coming">
 
-<section class="store">
+<h2>🚀 قريباً جداً</h2>
 
-<div class="product">
-<img src="https://i.imgur.com/0y0y0y0.jpg">
-<h3>Harka Headset</h3>
-<p>سماعات احترافية للبث والألعاب بجودة عالية</p>
-<div class="price">8 JD</div>
-<a class="buy" href="#">شراء</a>
-</div>
+<p>
+نحضر حالياً مجموعة منتجات حصرية خاصة بمجتمع Macseky  
+مثل هوديز - إكسسوارات - منتجات Gaming  
+وخدمات خاصة للمشاهدين 👀
+</p>
 
-<div class="product">
-<img src="https://i.imgur.com/0y0y0y0.jpg">
-<h3>Macseky Hoodie</h3>
-<p>هودي رسمي لعلامة Macseky</p>
-<div class="price">Coming Soon</div>
-<a class="buy" href="#">تفاصيل</a>
-</div>
-
-<div class="product">
-<img src="https://i.imgur.com/0y0y0y0.jpg">
-<h3>Gaming Mouse</h3>
-<p>ماوس احترافي للألعاب السريعة</p>
-<div class="price">Coming Soon</div>
-<a class="buy" href="#">تفاصيل</a>
+<div class="badge">
+COMING SOON
 </div>
 
 </section>
@@ -335,18 +262,15 @@ justify-content:center;
 
 /* ================= PARTICLES ================= */
 
-const canvas =
-document.getElementById("bgCanvas");
-
-const ctx =
-canvas.getContext("2d");
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
 
-for(let i=0;i<70;i++){
+for(let i=0;i<60;i++){
 
 particles.push({
 x:Math.random()*canvas.width,
