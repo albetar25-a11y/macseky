@@ -153,10 +153,11 @@
       z-index:-2;
       overflow:hidden;
     }
-    .video-bg iframe {
+    video {
       width:100%;
       height:100%;
-      border:none;
+      object-fit:cover;
+      transition:opacity 1s ease-in-out;
     }
     /* خلفية متحركة */
     #bgCanvas {
@@ -173,7 +174,7 @@
 <body>
 
 <div class="video-bg">
-  <iframe src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  <video id="bgVideo" autoplay muted playsinline></video>
 </div>
 <canvas id="bgCanvas"></canvas>
 
@@ -234,10 +235,7 @@
 </footer>
 
 <script>
-async function loadStats() {
-  try {
-    const res = await fetch("https://kick.com/api/v2/channels/macseky");
-    const data = await res.json();
-
-    let viewers = data.livestream?.viewer_count || 0;
-    document
+  // روابط الفيديوهات
+  const videos = [
+    "https://videotourl.com/videos/1778589545994-52b99f17-276c-4837-919f-9f2fcb6924e1.mp4",
+    "https://videotourl.com/videos/1778589686170-19cb8370-bd19-4f
