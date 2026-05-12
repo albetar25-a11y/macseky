@@ -1,246 +1,272 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Macseky</title>
 
-  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="icon" type="image/png" href="logo.png" />
 
   <style>
-    body{
-      margin:0;
-      font-family:'Tajawal',sans-serif;
-      background:#0A0A0C;
-      color:#fff;
-      overflow-x:hidden;
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      background: #0A0A0C;
+      color: #fff;
+      overflow-x: hidden;
     }
 
     /* ================= VIDEO BACKGROUND ================= */
-    .video-bg{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      z-index:-3;
-      overflow:hidden;
+
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      overflow: hidden;
     }
 
-    #bgVideo{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      opacity:1;
-      transition:opacity 1s ease-in-out;
+    #bgVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
     }
 
-    .video-overlay{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background:rgba(0,0,0,0.55);
-      z-index:-2;
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: -2;
     }
 
-    #bgCanvas{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      z-index:-1;
-      background:transparent;
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: transparent;
     }
 
     /* ================= HEADER ================= */
-    header{
-      background:#121212;
-      padding:15px;
-      text-align:center;
-      position:sticky;
-      top:0;
-      z-index:1000;
-      box-shadow:0 0 15px rgba(255,46,46,0.5);
+
+    header {
+      background: #121212;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 0 15px rgba(255, 46, 46, 0.5);
     }
 
-    header img{
-      height:70px;
-      transition:transform 0.6s ease, filter 0.6s ease;
+    header img {
+      height: 70px;
+      transition:
+        transform 0.6s ease,
+        filter 0.6s ease;
     }
 
-    header img:hover{
-      transform:scale(1.2) rotate(-5deg);
-      filter:drop-shadow(0 0 15px #FF2E2E);
+    header img:hover {
+      transform: scale(1.2) rotate(-5deg);
+      filter: drop-shadow(0 0 15px #FF2E2E);
     }
 
-    nav a{
-      color:#fff;
-      margin:0 10px;
-      text-decoration:none;
-      font-weight:bold;
-      position:relative;
-      transition:color 0.3s ease;
+    nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      transition: color 0.3s ease;
     }
 
-    nav a::after{
-      content:"";
-      position:absolute;
-      width:0%;
-      height:2px;
-      bottom:-5px;
-      left:0;
-      background:#FF2E2E;
-      transition:width 0.3s;
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: #FF2E2E;
+      transition: width 0.3s;
     }
 
-    nav a:hover{
-      color:#FF2E2E;
+    nav a:hover {
+      color: #FF2E2E;
     }
 
-    nav a:hover::after{
-      width:100%;
+    nav a:hover::after {
+      width: 100%;
     }
 
     /* ================= HERO ================= */
-    .hero{
-      text-align:center;
-      padding:120px 20px;
-      animation:fadeIn 2s ease;
-      position:relative;
-      z-index:1;
+
+    .hero {
+      text-align: center;
+      padding: 120px 20px;
+      animation: fadeIn 2s ease;
+      position: relative;
+      z-index: 1;
     }
 
-    .hero h1{
-      font-size:52px;
-      margin-bottom:20px;
-      text-shadow:0 0 25px #FF2E2E, 0 0 40px #007BFF;
-      animation:slideDown 1.5s ease;
+    .hero h1 {
+      font-size: 52px;
+      margin-bottom: 20px;
+      text-shadow:
+        0 0 25px #FF2E2E,
+        0 0 40px #007BFF;
+      animation: slideDown 1.5s ease;
     }
 
-    .hero button{
-      background:#FF2E2E;
-      color:#fff;
-      padding:15px 30px;
-      border:none;
-      font-size:18px;
-      cursor:pointer;
-      border-radius:8px;
-      box-shadow:0 0 20px #FF2E2E, 0 0 40px #FF2E2E;
-      transition:transform 0.3s ease, background 0.3s ease;
+    .hero button {
+      background: #FF2E2E;
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow:
+        0 0 20px #FF2E2E,
+        0 0 40px #FF2E2E;
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease;
     }
 
-    .hero button:hover{
-      transform:scale(1.1);
-      background:#007BFF;
-      box-shadow:0 0 20px #007BFF, 0 0 40px #007BFF;
+    .hero button:hover {
+      transform: scale(1.1);
+      background: #007BFF;
+      box-shadow:
+        0 0 20px #007BFF,
+        0 0 40px #007BFF;
     }
 
     /* ================= SECTIONS ================= */
-    section{
-      margin:60px auto;
-      max-width:800px;
-      text-align:center;
-      animation:fadeInUp 2s ease;
-      position:relative;
-      z-index:1;
+
+    section {
+      margin: 60px auto;
+      max-width: 800px;
+      text-align: center;
+      animation: fadeInUp 2s ease;
+      position: relative;
+      z-index: 1;
     }
 
-    ul{
-      list-style:none;
-      padding:0;
+    ul {
+      list-style: none;
+      padding: 0;
     }
 
-    ul li{
-      margin:10px 0;
-      background:rgba(28,28,28,0.7);
-      padding:10px;
-      border-radius:6px;
-    }
-
-    /* ================= DISCORD ================= */
-    .discord-highlight a{
-      display:inline-block;
-      margin-top:20px;
-      background:#007BFF;
-      color:#fff;
-      padding:12px 25px;
-      border-radius:6px;
-      text-decoration:none;
-      font-weight:bold;
-      transition:0.3s;
-      box-shadow:0 0 15px #007BFF;
-    }
-
-    .discord-highlight a:hover{
-      background:#FF2E2E;
-      transform:scale(1.1);
-      box-shadow:0 0 15px #FF2E2E;
-    }
-
-    /* ================= FOOTER ================= */
-    footer{
-      background:#121212;
-      text-align:center;
-      padding:20px;
-      font-size:14px;
-      box-shadow:0 -5px 15px rgba(0,0,0,0.5);
-      position:relative;
-      z-index:1;
+    ul li {
+      margin: 10px 0;
+      background: rgba(28, 28, 28, 0.7);
+      padding: 10px;
+      border-radius: 6px;
     }
 
     /* ================= DASHBOARD ================= */
-    .dashboard{
-      background:rgba(28,28,28,0.6);
-      backdrop-filter:blur(10px);
-      padding:20px;
-      border-radius:15px;
-      margin-top:40px;
-      box-shadow:0 0 20px rgba(255,46,46,0.5);
+
+    .dashboard {
+      background: rgba(28, 28, 28, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 40px;
+      box-shadow: 0 0 20px rgba(255, 46, 46, 0.5);
     }
 
-    .progress-container{
-      background:#333;
-      border-radius:8px;
-      overflow:hidden;
-      width:300px;
-      height:20px;
-      margin:8px auto;
+    .progress-container {
+      background: #333;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 300px;
+      height: 20px;
+      margin: 8px auto;
     }
 
-    .progress-bar{
-      height:100%;
-      width:0%;
-      transition:width 0.5s;
-      background:#FF2E2E;
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s;
+      background: #FF2E2E;
+    }
+
+    /* ================= DISCORD ================= */
+
+    .discord-highlight a {
+      display: inline-block;
+      margin-top: 20px;
+      background: #007BFF;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0 0 15px #007BFF;
+    }
+
+    .discord-highlight a:hover {
+      background: #FF2E2E;
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #FF2E2E;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #121212;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 1;
     }
 
     /* ================= ANIMATIONS ================= */
-    @keyframes fadeIn{
-      from{opacity:0;}
-      to{opacity:1;}
-    }
 
-    @keyframes slideDown{
-      from{
-        transform:translateY(-50px);
-        opacity:0;
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
       }
-      to{
-        transform:translateY(0);
-        opacity:1;
+
+      to {
+        opacity: 1;
       }
     }
 
-    @keyframes fadeInUp{
-      from{
-        transform:translateY(50px);
-        opacity:0;
+    @keyframes slideDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
       }
-      to{
-        transform:translateY(0);
-        opacity:1;
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
       }
     }
   </style>
@@ -248,191 +274,238 @@
 
 <body>
 
-<!-- ================= VIDEO BACKGROUND ================= -->
-<div class="video-bg">
-  <video
-    id="bgVideo"
-    autoplay
-    muted
-    playsinline
-    preload="auto">
-  </video>
-</div>
+  <!-- ================= VIDEO BACKGROUND ================= -->
 
-<div class="video-overlay"></div>
-<canvas id="bgCanvas"></canvas>
-
-<!-- ================= HEADER ================= -->
-<header>
-  <img src="logo.png" alt="Macseky Logo">
-
-  <nav>
-    <a href="index.html">🏠 الرئيسية</a>
-    <a href="about.html">من أنا</a>
-    <a href="rules.html">قوانين البث</a>
-    <a href="videos.html">أحدث الفيديوهات</a>
-    <a href="support.html">الدعم المادي</a>
-    <a href="shop.html">المتجر</a>
-    <a href="contact.html">تواصل</a>
-  </nav>
-</header>
-
-<!-- ================= HERO ================= -->
-<section class="hero">
-  <h1>مرحباً بكم في بثي المباشر – Macseky</h1>
-
-  <button onclick="window.open('https://kick.com/macseky','_blank')">
-    شاهد البث الآن
-  </button>
-</section>
-
-<!-- ================= ABOUT ================= -->
-<section class="about-snippet">
-  <h2>نبذة عني</h2>
-
-  <p>
-    أنا يزن (Macseky) من الأردن، مواليد 2004،
-    لاعب منتخب وطني للملاكمة منذ 2018،
-    ومشارك في محافل دولية عديدة مع إنجازات
-    على مستوى المملكة.
-    بجانب الرياضة، أنا صانع محتوى وبث مباشر يومي،
-    أشارك لحظاتي الحماسية معكم.
-  </p>
-</section>
-
-<!-- ================= SCHEDULE ================= -->
-<section class="schedule">
-  <h2>جدول البث اليومي</h2>
-
-  <p>
-    📅 البثوث يومية على منصة Kick
-    ابتداءً من الساعة 8 مساءً بتوقيت الأردن.
-  </p>
-
-  <ul>
-    <li>🎮 قراند الحياة الواقعية (GTA RP)</li>
-    <li>🔥 ألعاب متنوعة أخرى (FPS, قتال, مغامرات)</li>
-    <li>🥊 محتوى خاص بالملاكمة والرياضة</li>
-  </ul>
-</section>
-
-<!-- ================= DASHBOARD ================= -->
-<section class="dashboard">
-  <h2>📊 إحصائيات البث</h2>
-
-  <p>
-    👥 المشاهدين الآن:
-    <span id="viewers">غير متوفر</span>
-  </p>
-
-  <div class="progress-container">
-    <div id="viewerBar" class="progress-bar"></div>
+  <div class="video-bg">
+    <video
+      id="bgVideo"
+      autoplay
+      muted
+      playsinline
+      preload="auto">
+    </video>
   </div>
 
-  <p>
-    🎮 اللعبة الحالية:
-    <span id="game">غير متوفر</span>
-  </p>
+  <div class="video-overlay"></div>
 
-  <p>
-    📡 حالة البث:
-    <span id="status">غير متوفر</span>
-  </p>
-</section>
+  <canvas id="bgCanvas"></canvas>
 
-<!-- ================= DISCORD ================= -->
-<section class="discord-highlight">
-  <h2>انضم إلى مجتمعنا</h2>
+  <!-- ================= HEADER ================= -->
 
-  <a href="https://discord.gg/c8v3VfYcJ" target="_blank">
-    💬 ادخل إلى Discord
-  </a>
-</section>
+  <header>
 
-<!-- ================= FOOTER ================= -->
-<footer>
-  © 2026 Macseky. جميع الحقوق محفوظة.
-</footer>
+    <img src="logo.png" alt="Macseky Logo" />
 
-<!-- ================= VIDEO SYSTEM ================= -->
-<script>
-  const videos = [
-    "videos/video3.mp4",
-    "videos/video4.mp4",
-    "videos/video5.mp4",
-    "videos/video6.mp4",
-    "videos/video7.mp4",
-    "videos/video8.mp4"
-  ];
+    <nav>
+      <a href="index.html">🏠 الرئيسية</a>
+      <a href="about.html">من أنا</a>
+      <a href="rules.html">قوانين البث</a>
+      <a href="videos.html">أحدث الفيديوهات</a>
+      <a href="support.html">الدعم المادي</a>
+      <a href="shop.html">المتجر</a>
+      <a href="contact.html">تواصل</a>
+    </nav>
 
-  const bgVideo = document.getElementById("bgVideo");
+  </header>
 
-  let currentVideo = 0;
+  <!-- ================= HERO ================= -->
 
-  // تشغيل الفيديو
-  function loadVideo(index) {
+  <section class="hero">
 
-    bgVideo.style.opacity = 0;
+    <h1>
+      مرحباً بكم في بثي المباشر – Macseky
+    </h1>
 
-    setTimeout(() => {
+    <button onclick="window.open('https://kick.com/macseky','_blank')">
+      شاهد البث الآن
+    </button>
 
-      bgVideo.src = videos[index];
+  </section>
 
-      bgVideo.load();
+  <!-- ================= ABOUT ================= -->
 
-      const playPromise = bgVideo.play();
+  <section class="about-snippet">
 
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log("Video autoplay blocked:", error);
+    <h2>نبذة عني</h2>
+
+    <p>
+      أنا يزن (Macseky) من الأردن،
+      لاعب منتخب وطني للملاكمة،
+      وصانع محتوى وبث مباشر يومي
+      على منصة Kick.
+    </p>
+
+  </section>
+
+  <!-- ================= SCHEDULE ================= -->
+
+  <section class="schedule">
+
+    <h2>جدول البث اليومي</h2>
+
+    <p>
+      📅 البثوث يومية
+      الساعة 8 مساءً بتوقيت الأردن.
+    </p>
+
+    <ul>
+      <li>🎮 GTA RP</li>
+      <li>🔥 ألعاب متنوعة</li>
+      <li>🥊 محتوى ملاكمة ورياضي</li>
+    </ul>
+
+  </section>
+
+  <!-- ================= DASHBOARD ================= -->
+
+  <section class="dashboard">
+
+    <h2>📊 إحصائيات البث</h2>
+
+    <p>
+      👥 المشاهدين الآن:
+      <span id="viewers">غير متوفر</span>
+    </p>
+
+    <div class="progress-container">
+      <div id="viewerBar" class="progress-bar"></div>
+    </div>
+
+    <p>
+      🎮 اللعبة الحالية:
+      <span id="game">غير متوفر</span>
+    </p>
+
+    <p>
+      📡 حالة البث:
+      <span id="status">غير متوفر</span>
+    </p>
+
+  </section>
+
+  <!-- ================= DISCORD ================= -->
+
+  <section class="discord-highlight">
+
+    <h2>انضم إلى مجتمعنا</h2>
+
+    <a
+      href="https://discord.gg/c8v3VfYcJ"
+      target="_blank">
+
+      💬 ادخل إلى Discord
+
+    </a>
+
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+    © 2026 Macseky. جميع الحقوق محفوظة.
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+
+  <script>
+
+    // ================= VIDEOS =================
+
+    const videos = [
+      "videos/video3.mp4",
+      "videos/video4.mp4",
+      "videos/video5.mp4",
+      "videos/video6.mp4",
+      "videos/video7.mp4",
+      "videos/video8.mp4"
+    ];
+
+    const video =
+      document.getElementById("bgVideo");
+
+    let currentVideo = 0;
+
+    // ================= PLAY VIDEO =================
+
+    function playVideo(index) {
+
+      video.style.opacity = 0;
+
+      setTimeout(() => {
+
+        video.src = videos[index];
+
+        video.load();
+
+        video.play().catch(err => {
+          console.log("Video Error:", err);
         });
+
+        video.style.opacity = 1;
+
+      }, 500);
+    }
+
+    // ================= START =================
+
+    playVideo(currentVideo);
+
+    // ================= CHANGE VIDEO EVERY 30 SECONDS =================
+
+    setInterval(() => {
+
+      currentVideo++;
+
+      // يرجع لأول فيديو بعد آخر فيديو
+      if (currentVideo >= videos.length) {
+        currentVideo = 0;
       }
 
-      bgVideo.style.opacity = 1;
+      playVideo(currentVideo);
 
-    }, 500);
-  }
+    }, 30000);
 
-  // أول تشغيل
-  loadVideo(currentVideo);
+    // ================= DASHBOARD =================
 
-  // لما يخلص الفيديو يشغل اللي بعده
-  bgVideo.addEventListener("ended", () => {
+    async function loadStats() {
 
-    currentVideo++;
+      try {
 
-    if (currentVideo >= videos.length) {
-      currentVideo = 0;
+        const res =
+          await fetch("/status");
+
+        const data =
+          await res.json();
+
+        document.getElementById("viewers").innerText =
+          data.viewers || 0;
+
+        document.getElementById("game").innerText =
+          data.game || "None";
+
+        document.getElementById("status").innerText =
+          data.live
+            ? "🟢 مباشر"
+            : "🔴 أوفلاين";
+
+        const percent =
+          Math.min(data.viewers || 0, 100);
+
+        document.getElementById("viewerBar").style.width =
+          percent + "%";
+
+      } catch (err) {
+
+        console.log("Dashboard Error");
+
+      }
     }
 
-    loadVideo(currentVideo);
-  });
+    loadStats();
 
-  // ================= DASHBOARD FETCH =================
-  async function loadStats() {
+    setInterval(loadStats, 10000);
 
-    try {
-
-      const res = await fetch("/status");
-
-      const data = await res.json();
-
-      document.getElementById("game").textContent =
-        data.game || "غير معروف";
-
-      document.getElementById("status").textContent =
-        data.live ? "🔴 مباشر" : "⚫ غير مباشر";
-
-    } catch (err) {
-
-      console.log("Dashboard Error");
-    }
-  }
-
-  loadStats();
-
-  setInterval(loadStats, 5000);
-</script>
+  </script>
 
 </body>
 </html>
