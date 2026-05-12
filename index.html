@@ -12,163 +12,32 @@
       color:#fff;
       overflow-x:hidden;
     }
-    header {
-      background:#121212;
-      padding:15px;
-      text-align:center;
-      position:sticky;
-      top:0;
-      z-index:1000;
-      box-shadow:0 0 15px rgba(255,46,46,0.5);
-    }
-    header img {
-      height:70px;
-      transition:transform 0.6s ease, filter 0.6s ease;
-    }
-    header img:hover {
-      transform:scale(1.2) rotate(-5deg);
-      filter:drop-shadow(0 0 15px #FF2E2E);
-    }
-    nav a {
-      color:#fff;
-      margin:0 10px;
-      text-decoration:none;
-      font-weight:bold;
-      position:relative;
-      transition:color 0.3s ease;
-    }
-    nav a::after {
-      content:"";
-      position:absolute;
-      width:0%;
-      height:2px;
-      bottom:-5px;
-      left:0;
-      background:#FF2E2E;
-      transition:width 0.3s;
-    }
-    nav a:hover {
-      color:#FF2E2E;
-    }
-    nav a:hover::after {
-      width:100%;
-    }
-    .hero {
-      text-align:center;
-      padding:120px 20px;
-      animation:fadeIn 2s ease;
-      position:relative;
-      z-index:1;
-    }
-    .hero h1 {
-      font-size:52px;
-      margin-bottom:20px;
-      text-shadow:0 0 25px #FF2E2E, 0 0 40px #007BFF;
-      animation:slideDown 1.5s ease;
-    }
-    .hero button {
-      background:#FF2E2E;
-      color:#fff;
-      padding:15px 30px;
-      border:none;
-      font-size:18px;
-      cursor:pointer;
-      border-radius:8px;
-      box-shadow:0 0 20px #FF2E2E, 0 0 40px #FF2E2E;
-      transition:transform 0.3s ease, background 0.3s ease;
-    }
-    .hero button:hover {
-      transform:scale(1.1);
-      background:#007BFF;
-      box-shadow:0 0 20px #007BFF, 0 0 40px #007BFF;
-    }
-    section {
-      margin:60px auto;
-      max-width:800px;
-      text-align:center;
-      animation:fadeInUp 2s ease;
-      position:relative;
-      z-index:1;
-    }
+    header {background:#121212; padding:15px; text-align:center; position:sticky; top:0; z-index:1000; box-shadow:0 0 15px rgba(255,46,46,0.5);}
+    header img {height:70px; transition:transform 0.6s ease, filter 0.6s ease;}
+    header img:hover {transform:scale(1.2) rotate(-5deg); filter:drop-shadow(0 0 15px #FF2E2E);}
+    nav a {color:#fff; margin:0 10px; text-decoration:none; font-weight:bold; position:relative; transition:color 0.3s ease;}
+    nav a::after {content:""; position:absolute; width:0%; height:2px; bottom:-5px; left:0; background:#FF2E2E; transition:width 0.3s;}
+    nav a:hover {color:#FF2E2E;}
+    nav a:hover::after {width:100%;}
+    .hero {text-align:center; padding:120px 20px; animation:fadeIn 2s ease; position:relative; z-index:1;}
+    .hero h1 {font-size:52px; margin-bottom:20px; text-shadow:0 0 25px #FF2E2E, 0 0 40px #007BFF; animation:slideDown 1.5s ease;}
+    .hero button {background:#FF2E2E; color:#fff; padding:15px 30px; border:none; font-size:18px; cursor:pointer; border-radius:8px; box-shadow:0 0 20px #FF2E2E, 0 0 40px #FF2E2E; transition:transform 0.3s ease, background 0.3s ease;}
+    .hero button:hover {transform:scale(1.1); background:#007BFF; box-shadow:0 0 20px #007BFF, 0 0 40px #007BFF;}
+    section {margin:60px auto; max-width:800px; text-align:center; animation:fadeInUp 2s ease; position:relative; z-index:1;}
     ul {list-style:none; padding:0;}
     ul li {margin:10px 0; background:rgba(28,28,28,0.7); padding:10px; border-radius:6px;}
-    .discord-highlight a {
-      display:inline-block;
-      margin-top:20px;
-      background:#007BFF;
-      color:#fff;
-      padding:12px 25px;
-      border-radius:6px;
-      text-decoration:none;
-      font-weight:bold;
-      transition:0.3s;
-      box-shadow:0 0 15px #007BFF;
-    }
-    .discord-highlight a:hover {
-      background:#FF2E2E;
-      transform:scale(1.1);
-      box-shadow:0 0 15px #FF2E2E;
-    }
-    footer {
-      background:#121212;
-      text-align:center;
-      padding:20px;
-      font-size:14px;
-      box-shadow:0 -5px 15px rgba(0,0,0,0.5);
-      position:relative;
-      z-index:1;
-    }
+    .discord-highlight a {display:inline-block; margin-top:20px; background:#007BFF; color:#fff; padding:12px 25px; border-radius:6px; text-decoration:none; font-weight:bold; transition:0.3s; box-shadow:0 0 15px #007BFF;}
+    .discord-highlight a:hover {background:#FF2E2E; transform:scale(1.1); box-shadow:0 0 15px #FF2E2E;}
+    footer {background:#121212; text-align:center; padding:20px; font-size:14px; box-shadow:0 -5px 15px rgba(0,0,0,0.5); position:relative; z-index:1;}
     @keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
     @keyframes slideDown {from{transform:translateY(-50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
     @keyframes fadeInUp {from{transform:translateY(50px); opacity:0;} to{transform:translateY(0); opacity:1;}}
-    /* Dashboard */
-    .dashboard {
-      background:rgba(28,28,28,0.6);
-      backdrop-filter:blur(10px);
-      padding:20px;
-      border-radius:15px;
-      margin-top:40px;
-      box-shadow:0 0 20px rgba(255,46,46,0.5);
-    }
-    .progress-container {
-      background:#333;
-      border-radius:8px;
-      overflow:hidden;
-      width:300px;
-      height:20px;
-      margin:8px auto;
-    }
-    .progress-bar {
-      height:100%;
-      width:0%;
-      transition:width 0.5s;
-    }
-    /* خلفية فيديو */
-    .video-bg {
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      z-index:-2;
-      overflow:hidden;
-    }
-    video {
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transition:opacity 1s ease-in-out;
-    }
-    /* خلفية متحركة */
-    #bgCanvas {
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      z-index:-1;
-      background:transparent;
-    }
+    .dashboard {background:rgba(28,28,28,0.6); backdrop-filter:blur(10px); padding:20px; border-radius:15px; margin-top:40px; box-shadow:0 0 20px rgba(255,46,46,0.5);}
+    .progress-container {background:#333; border-radius:8px; overflow:hidden; width:300px; height:20px; margin:8px auto;}
+    .progress-bar {height:100%; width:0%; transition:width 0.5s;}
+    .video-bg {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2; overflow:hidden;}
+    video {width:100%; height:100%; object-fit:cover; transition:opacity 1s ease-in-out;}
+    #bgCanvas {position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background:transparent;}
   </style>
 </head>
 <body>
@@ -198,11 +67,7 @@
 
 <section class="about-snippet">
   <h2>نبذة عني</h2>
-  <p>
-    أنا يزن (Macseky) من الأردن، مواليد 2004، لاعب منتخب وطني للملاكمة منذ 2018، 
-    ومشارك في محافل دولية عديدة مع إنجازات على مستوى المملكة.  
-    بجانب الرياضة، أنا صانع محتوى وبث مباشر يومي، أشارك لحظاتي الحماسية معكم.
-  </p>
+  <p>أنا يزن (Macseky) من الأردن، مواليد 2004، لاعب منتخب وطني للملاكمة منذ 2018، ومشارك في محافل دولية عديدة مع إنجازات على مستوى المملكة. بجانب الرياضة، أنا صانع محتوى وبث مباشر يومي، أشارك لحظاتي الحماسية معكم.</p>
 </section>
 
 <section class="schedule">
@@ -218,9 +83,7 @@
 <section class="dashboard">
   <h2>📊 إحصائيات البث</h2>
   <p>👥 المشاهدين الآن: <span id="viewers">جارٍ التحميل...</span></p>
-  <div class="progress-container">
-    <div id="viewerBar" class="progress-bar"></div>
-  </div>
+  <div class="progress-container"><div id="viewerBar" class="progress-bar"></div></div>
   <p>🎮 اللعبة الحالية: <span id="game">جارٍ التحميل...</span></p>
   <p>📡 حالة البث: <span id="status">جارٍ التحميل...</span></p>
 </section>
@@ -230,12 +93,13 @@
   <a href="https://discord.gg/c8v3VfYcJ" target="_blank">💬 ادخل إلى Discord</a>
 </section>
 
-<footer>
-  © 2026 Macseky. جميع الحقوق محفوظة.
-</footer>
+<footer>© 2026 Macseky. جميع الحقوق محفوظة.</footer>
 
 <script>
   // روابط الفيديوهات
   const videos = [
     "https://videotourl.com/videos/1778589545994-52b99f17-276c-4837-919f-9f2fcb6924e1.mp4",
-    "https://videotourl.com/videos/1778589686170-19cb8370-bd19-4f
+    "https://videotourl.com/videos/1778589686170-19cb8370-bd19-4f88-b9ba-ca16ebc8876e.mp4",
+    "https://videotourl.com/videos/1778589732572-5819d8c6-ac9e-4a18-adf5-1656db8df18e.mp4",
+    "https://videotourl.com/videos/1778589764966-90a1015f-8bf2-4d7b-9b93-30271a43986b.mp4",
+    "https://videotourl.com/videos/1778589789165-7a69ab1
