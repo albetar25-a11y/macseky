@@ -12,8 +12,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* نفس ستايل الصفحة الرئيسية */
 *{
 margin:0;
 padding:0;
@@ -27,7 +25,6 @@ color:white;
 overflow-x:hidden;
 }
 
-/* BACKGROUND VIDEO STYLE */
 .video-bg{
 position:fixed;
 top:0;
@@ -46,8 +43,6 @@ height:100%;
 background:linear-gradient(to bottom, rgba(0,0,0,.7), rgba(0,0,0,.9));
 z-index:-1;
 }
-
-/* HEADER */
 
 header{
 position:fixed;
@@ -84,8 +79,6 @@ font-family:'Orbitron',sans-serif;
 font-size:26px;
 }
 
-/* NAV */
-
 nav{
 display:flex;
 gap:18px;
@@ -118,8 +111,6 @@ transition:.3s;
 nav a:hover::after{
 width:100%;
 }
-
-/* HERO */
 
 .hero{
 min-height:100vh;
@@ -179,7 +170,6 @@ text-align:center;
 background:rgba(0,0,0,.6);
 border-top:1px solid rgba(255,255,255,.08);
 }
-
 </style>
 
 </head>
@@ -190,7 +180,6 @@ border-top:1px solid rgba(255,255,255,.08);
 <div class="overlay"></div>
 
 <header>
-
 <div class="logo">
 <img src="logo.png">
 <h1>MACSEKY</h1>
@@ -205,13 +194,10 @@ border-top:1px solid rgba(255,255,255,.08);
 <a href="shop.html">المتجر</a>
 <a href="contact.html">تواصل</a>
 </nav>
-
 </header>
 
 <section class="hero">
-
 <div class="hero-content">
-
 <h2>أحدث فيديو</h2>
 
 <div class="video-box">
@@ -221,9 +207,7 @@ border-top:1px solid rgba(255,255,255,.08);
 <a class="btn" href="https://www.youtube.com/@macseky" target="_blank">
 شاهد القناة
 </a>
-
 </div>
-
 </section>
 
 <footer>
@@ -231,29 +215,22 @@ border-top:1px solid rgba(255,255,255,.08);
 </footer>
 
 <script>
+const channelId = "UCb9-8VgDZyQg7iT9hfI3jGQ";
 
-/*
-الحل الحقيقي: جلب آخر فيديو من القناة عبر RSS (بدون API key)
-*/
+fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`)
+  .then(res => res.text())
+  .then(str => {
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(str, "text/xml");
 
-const channelName = "macseky";
+    const videoId = xml.querySelector("entry > yt\\:videoId").textContent;
 
-fetch(`https://www.youtube.com/feeds/videos.xml?user=USERNAME`)
-.then(res => res.text())
-.then(str => {
-const parser = new DOMParser();
-const xml = parser.parseFromString(str, "text/xml");
-
-const videoId = xml.querySelector("entry > videoId").textContent;
-
-document.getElementById("ytvideo").src =
-`https://www.youtube.com/embed/${videoId}`;
-
-})
-.catch(err => {
-console.log("Error loading video", err);
-});
-
+    document.getElementById("ytvideo").src =
+      `https://www.youtube.com/embed/${videoId}`;
+  })
+  .catch(err => {
+    console.log("Error loading video", err);
+  });
 </script>
 
 </body>
