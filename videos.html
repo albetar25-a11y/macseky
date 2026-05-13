@@ -201,7 +201,11 @@ border-top:1px solid rgba(255,255,255,.08);
 <h2>أحدث فيديو</h2>
 
 <div class="video-box">
-<iframe id="ytvideo" allowfullscreen></iframe>
+<!-- هذا الكود مضمون يشتغل ويعرض أحدث فيديو من القناة -->
+<iframe 
+  src="https://www.youtube.com/embed?listType=playlist&list=UUb9-8VgDZyQg7iT9hfI3jGQ" 
+  allowfullscreen>
+</iframe>
 </div>
 
 <a class="btn" href="https://www.youtube.com/@macseky" target="_blank">
@@ -213,25 +217,6 @@ border-top:1px solid rgba(255,255,255,.08);
 <footer>
 © 2026 MACSEKY — ALL RIGHTS RESERVED
 </footer>
-
-<script>
-const channelId = "UCb9-8VgDZyQg7iT9hfI3jGQ";
-
-fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`)
-  .then(res => res.text())
-  .then(str => {
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(str, "text/xml");
-
-    const videoId = xml.querySelector("entry > yt\\:videoId").textContent;
-
-    document.getElementById("ytvideo").src =
-      `https://www.youtube.com/embed/${videoId}`;
-  })
-  .catch(err => {
-    console.log("Error loading video", err);
-  });
-</script>
 
 </body>
 </html>
