@@ -307,5 +307,21 @@ animate();
 
 </script>
 
+<script>
+const collected = 14; // المبلغ الحالي، عدّله يدويًا
+const goal = 100;
+
+const percentage = Math.min(
+  100,
+  Math.max(0, (collected / goal) * 100)
+);
+
+document.getElementById("goalFill").style.width =
+  percentage + "%";
+
+document.getElementById("goalText").textContent =
+  `تم جمع ${collected}$ من ${goal}$ — ${percentage}%`;
+</script>
+
 </body>
 </html>
