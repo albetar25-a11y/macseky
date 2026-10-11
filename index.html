@@ -80,6 +80,7 @@ nav{justify-content:center;}
 
 <!-- VIDEO -->
 
+
 <script>
 const bgVideo = document.getElementById("bgVideo");
 
@@ -93,17 +94,18 @@ const videos = [
 
 let currentVideo = 0;
 
-bgVideo.addEventListener("ended", () => {
+bgVideo.addEventListener("ended", function () {
   currentVideo = (currentVideo + 1) % videos.length;
 
   bgVideo.src = videos[currentVideo];
   bgVideo.load();
 
-  bgVideo.play().catch(error => {
-    console.warn("تعذر تشغيل الفيديو التالي:", error);
+  bgVideo.play().catch(function (error) {
+    console.error("تعذر تشغيل الفيديو التالي:", error);
   });
 });
 </script>
+
 </body>
 </html>
 
