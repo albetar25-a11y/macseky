@@ -79,12 +79,33 @@ nav{justify-content:center;}
 <body>
 
 <!-- VIDEO -->
-<div class="video-bg">
-<video id="bgVideo" autoplay muted playsinline loop>
-<source src="videos/video3.mp4" type="video/mp4">
-</video>
-</div>
-<div class="overlay"></div>
+
+<script>
+const bgVideo = document.getElementById("bgVideo");
+
+const videos = [
+  "videos/video3.mp4",
+  "videos/video4.mp4",
+  "videos/video5.mp4",
+  "videos/video6.mp4",
+  "videos/video7.mp4"
+];
+
+let currentVideo = 0;
+
+bgVideo.addEventListener("ended", () => {
+  currentVideo = (currentVideo + 1) % videos.length;
+
+  bgVideo.src = videos[currentVideo];
+  bgVideo.load();
+
+  bgVideo.play().catch(error => {
+    console.warn("تعذر تشغيل الفيديو التالي:", error);
+  });
+});
+</script>
+</body>
+</html>
 
 <!-- HEADER -->
 <header>
