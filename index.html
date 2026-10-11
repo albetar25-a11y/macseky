@@ -130,14 +130,64 @@ nav{justify-content:center;}
 <!-- FOOTER -->
 <footer>© 2026 MACSEKY — ALL RIGHTS RESERVED</footer>
 
-<script>
-async function loadStats(){
-  try{
-    const res = await fetch("https://kick.com/api/v2/channels/macseky");
-    const data = await res.json();
-    const live = data.livestream?.is_live;
-    const viewers = data.livestream?.viewer_count;
-    const game = data.livestream?.session_title;
-    const started = data.livestream?.started_at;
 
-    document.getElementById("viewers").textContent = viewers ??
+<script>
+async function loadStats() {
+  const viewersEl = document.getElementById("viewers");
+  const gameEl = document.getElementById("game");
+  const statusEl = document.getElementById("status");
+  const uptimeEl = document.getElementById("uptime");
+
+  try {
+    const res = await fetch("https://kick.com/api/v2/channels/macseky");
+
+    if (!res.ok) {
+      throw new Error("تعذر جلب بيانات Kick");
+    }
+
+    const data = await res.json();
+    const stream = data.livestream;
+
+    if (!stream || !stream.is_live) {
+      viewersEl.textContent = "0";
+      gameEl.textContent = "لا يوجد بث حاليًا";
+      statusEl.textContent = "🔴 غير مباشر";
+      uptimeEl.textContent = "--";
+      return;
+    }
+
+    viewersEl.textContent = stream.viewer_count ?? "--";
+    gameEl.textContent = stream.session_title || "غير محدد";
+    statusEl.textContent = "🟢 مباشر";
+
+    if (stream.started_at) {
+      const startTime = new Date(stream.started_at);
+      const elapsed = Date.now() - startTime.getTime();
+
+      if (!Number.isNaN(startTime.getTime()) && elapsed >= 0) {
+        const totalMinutes = Math.floor(elapsed / 60000);
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+
+        uptimeEl.textContent = `${hours} ساعة و ${minutes} دقيقة`;
+      } else {
+        uptimeEl.textContent = "--";
+      }
+    } else {
+      uptimeEl.textContent = "--";
+    }
+  } catch (error) {
+    console.error("خطأ في تحميل إحصائيات Kick:", error);
+    viewersEl.textContent = "--";
+    gameEl.textContent = "--";
+    statusEl.textContent = "تعذر الاتصال";
+    uptimeEl.textContent = "--";
+  }
+}
+
+loadStats();
+setInterval(loadStats, 60000);
+</script>
+
+</body>
+</html>
