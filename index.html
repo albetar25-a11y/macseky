@@ -81,30 +81,52 @@ nav{justify-content:center;}
 <!-- VIDEO -->
 
 
+
 <script>
-const bgVideo = document.getElementById("bgVideo");
+(() => {
+  const video = document.getElementById("bgVideo");
 
-const videos = [
-  "videos/video3.mp4",
-  "videos/video4.mp4",
-  "videos/video5.mp4",
-  "videos/video6.mp4",
-  "videos/video7.mp4"
-];
+  const videos = [
+    "videos/video3.mp4",
+    "videos/video4.mp4",
+    "videos/video5.mp4",
+    "videos/video6.mp4",
+    "videos/video7.mp4",
+    "videos/video8.mp4"
+  ];
 
-let currentVideo = 0;
+  let current = 0;
+  let switching = false;
 
-bgVideo.addEventListener("ended", function () {
-  currentVideo = (currentVideo + 1) % videos.length;
+  video.loop = false;
 
-  bgVideo.src = videos[currentVideo];
-  bgVideo.load();
+  video.addEventListener("ended", () => {
+    if (switching) return;
+    switching = true;
 
-  bgVideo.play().catch(function (error) {
-    console.error("تعذر تشغيل الفيديو التالي:", error);
+    const next = (current + 1) % videos.length;
+    const source = videos[next];
+
+    video.pause();
+    video.src = source;
+    video.load();
+
+    const onReady = () => {
+      video.removeEventListener("canplay", onReady);
+      current = next;
+
+      video.play()
+        .catch(error => console.error("فشل تشغيل الفيديو:", source, error))
+        .finally(() => {
+          switching = false;
+        });
+    };
+
+    video.addEventListener("canplay", onReady);
   });
-});
+})();
 </script>
+
 
 </body>
 </html>
